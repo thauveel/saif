@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="Ungoofaaru Council">
-    <meta name="title" content="Ungoofaaru Council">
-    <meta name="author" content="Ungoofaaru Council">
+    <meta name="description" content="SAIF ">
+    <meta name="title" content="SAIF ">
+    <meta name="author" content="SAIF ">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="UC">
     <link rel="apple-touch-icon" sizes="57x57" href="/img/fav/apple-icon-57x57.png">
@@ -52,7 +52,7 @@
         <div class="flex justify-center items-center">
             <a href="#" class="-m-1.5 p-1.5">
             <span class="sr-only">Your Company</span>
-            <img class="h-24 w-auto" src="/img/logo.jpg" alt="">
+            <img class="h-32 w-auto" src="/img/logo.png" alt="">
             </a>
         </div>
         
@@ -79,7 +79,7 @@
     <div class="container px-6 py-8 mx-auto">
         <div class="flex flex-col items-center text-center">
             <a href="#">
-                <img class="w-auto h-7" src="/img/logo.jpg" alt="">
+                <img class="w-auto h-7" src="/img/logo.png" alt="">
             </a>
 
             <div class="flex flex-wrap justify-center mt-6 -mx-4">

@@ -13,4 +13,8 @@ class FrontController extends Controller
     public function livescore(){
         return 'livescore';
     }
+
+    public function apply(){
+        return view('application');
+    }
 }

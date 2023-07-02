@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Team as Teams;
 use App\Models\Official as Officials;
 use App\Models\Player as Players;
+use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
 use File;
 
@@ -107,6 +108,24 @@ class Team extends Component
         $this->officials = array_values($this->officials);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function mount(Request $request)
+    {
+        if ($request->has('team')) 
+        {
+            $this->current_team = Teams::find($request->team);
+            $this->players =  $this->current_team->players()->get();
+            $this->officials = $this->current_team->officials()->get();
+            $this->step=1;
+        }
+        
+    }
 
     public function render()
     {

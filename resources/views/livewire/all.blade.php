@@ -49,7 +49,90 @@
         </div>
     </header>
     <div class="w-full sm:max-w-4xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-
         
-    </div>
+    <div class="mx-auto">
+        <div class="flex items-center space-x-5">
+          <div class="flex-shrink-0">
+            <div class="relative">
+                @if($current_team['logo'])
+                    <img class="h-16 w-16 rounded-full" src="{{ asset('storage/' . $current_team['logo']) }}" alt="">
+                @endif
+                <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div>
+            <h1 class="text-2xl font-bold text-gray-900">{{$current_team->name}}</h1>
+            <p class="text-sm font-medium text-gray-500">{{$current_team->email}} | {{$current_team->phone}}</p>
+          </div>
+        </div>
+      </div>
+
+
+        <!-- Team -->
+        <div class="mt-4">
+            <label class="block font-medium text-sm text-gray-700" for="players">
+                Players ({{count($players)}})
+            </label>
+                @if($players )
+                <ul role="list" class="mx-auto mt-20 grid grid-cols-1 gap-x-8 gap-y-16 text-center sm:grid-cols-2 md:grid-cols-3 lg:mx-0 lg:max-w-none lg:grid-cols-4 xl:grid-cols-5">
+                    @foreach ($players as $player)
+                    <li class="relative group duration-300 transform cursor-pointer group hover:bg-blue-600 rounded-xl p-4">
+                    <button wire:click.prevent="delete_player({{$loop->index}})" type="button" class="absolute top-0 right-0 mt-[-5px] mr-[-5px] rounded-full bg-red-600 p-1 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+
+                    </button>
+                        @if($player['photo'])
+                        <img class="mx-auto h-24 w-24 rounded-full" src="{{ asset('storage/' . $player['photo']) }}" alt="">
+                        @else
+                        <img class="mx-auto h-24 w-24 rounded-full" src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=200" alt="">
+                        @endif
+                        <h3 class="relative inline-flex items-center gap-x-1.5 mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">
+                        {{$player['player_name']}} ({{$player['jersey_number']}})
+                            @if($player['is_libero'])
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                                </svg>
+                            </span>
+                            @endif
+                        </h3>
+                        <p class="text-sm leading-6 text-gray-600">{{$player['id_number']}}</p>
+                    </li>
+                    @endforeach
+                
+                </ul>
+                @endif
+                <label class="block font-medium text-sm text-gray-700" for="players">
+                Officials ({{count($officials)}})
+            </label>
+            @if($officials )
+            <ul role="list" class="mx-auto mt-20 grid grid-cols-1 gap-x-8 gap-y-16 text-center sm:grid-cols-2 md:grid-cols-3 lg:mx-0 lg:max-w-none lg:grid-cols-4 xl:grid-cols-5">
+                @foreach ($officials as $official)
+                <li class="relative group duration-300 transform cursor-pointer group hover:bg-blue-600 rounded-xl p-4">
+                    <button wire:click.prevent="delete_official({{$loop->index}})" type="button" class="absolute top-0 right-0 mt-[-5px] mr-[-5px] rounded-full bg-red-600 p-1 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+
+                    </button>
+                    @if($official['photo'])
+                    <img class="mx-auto h-24 w-24 rounded-full" src="{{ asset('storage/' . $official['photo']) }}" alt="">
+                    @else
+                    <img class="mx-auto h-24 w-24 rounded-full" src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=200" alt="">
+                    @endif
+                    <h3 class="relative inline-flex items-center gap-x-1.5 mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">
+                        {{$official['official_name']}} ({{$official['official_type']}})
+                        
+                    </h3>
+                    <p class="text-sm leading-6 text-gray-600">{{$official['id_number']}}</p>
+                </li>
+                @endforeach
+            
+            </ul>
+            @endif 
+        </div>
+
+
 </div>

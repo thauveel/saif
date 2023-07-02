@@ -125,7 +125,13 @@
             @if($officials )
             <ul role="list" class="mx-auto mt-20 grid grid-cols-1 gap-x-8 gap-y-16 text-center sm:grid-cols-2 md:grid-cols-3 lg:mx-0 lg:max-w-none lg:grid-cols-4 xl:grid-cols-5">
                 @foreach ($officials as $official)
-                <li>
+                <li class="relative group duration-300 transform cursor-pointer group hover:bg-blue-600 rounded-xl p-4">
+                    <button wire:click.prevent="delete_official({{$loop->index}})" type="button" class="absolute top-0 right-0 mt-[-5px] mr-[-5px] rounded-full bg-red-600 p-1 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+
+                    </button>
                     @if($official['photo'])
                     <img class="mx-auto h-24 w-24 rounded-full" src="{{ asset('storage/' . $official['photo']) }}" alt="">
                     @else
@@ -163,9 +169,11 @@
                 {{ session()->get('error') }}
             </p>
         @endif
-        <x-primary-button wire:click.prevent=""  class="ml-4">
+        @if (count($officials) >= 3)
+        <x-primary-button wire:click.prevent="next_step()"  class="ml-4">
             {{ __('Next') }}
         </x-primary-button>
+        @endif
     </div>
 </div>
 </div>

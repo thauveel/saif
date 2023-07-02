@@ -173,7 +173,7 @@
             </div>
             @endif
         </div>
-    <!-- Next -->
+        
        
     <div class="flex items-center justify-end mt-4">
             @if(session()->has('success'))
@@ -186,9 +186,11 @@
                     {{ session()->get('error') }}
                 </p>
             @endif
+            @if (count($players) >= 6)
             <x-primary-button wire:click.prevent="next_step()"  class="ml-4">
                 {{ __('Next') }}
             </x-primary-button>
+            @endif
         </div>
 </div>
 </div>

@@ -1,62 +1,55 @@
-<div>
-    <x-slot name="header">
-        <nav aria-label="Progress">
-            <ol role="list" class="flex items-center">
-                <li class="relative pr-8 sm:pr-20">
-                <!-- Completed Step -->
-                <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div class="h-0.5 w-full bg-indigo-600"></div>
-                </div>
-                <a href="#" class="relative flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-900">
-                    <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="sr-only">Step 1</span>
-                </a>
-                </li>
-                <li class="relative pr-8 sm:pr-20">
-                <!-- Current Step -->
-                <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div class="h-0.5 w-full bg-gray-200"></div>
-                </div>
-                <a href="#" class="relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-indigo-600 bg-white" aria-current="step">
-                    <span class="h-2.5 w-2.5 rounded-full bg-indigo-600" aria-hidden="true"></span>
-                    <span class="sr-only">Step 2</span>
-                </a>
-                </li>
-                <li class="relative pr-8 sm:pr-20">
-                <!-- Upcoming Step -->
-                <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div class="h-0.5 w-full bg-gray-200"></div>
-                </div>
-                <a href="#" class="group relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white hover:border-gray-400">
-                    <span class="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" aria-hidden="true"></span>
-                    <span class="sr-only">Step 3</span>
-                </a>
-                </li>
-                <li class="relative pr-8 sm:pr-20">
-                <!-- Upcoming Step -->
-                <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div class="h-0.5 w-full bg-gray-200"></div>
-                </div>
-                <a href="#" class="group relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white hover:border-gray-400">
-                    <span class="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" aria-hidden="true"></span>
-                    <span class="sr-only">Step 4</span>
-                </a>
-                </li>
-                <li class="relative">
-                <!-- Upcoming Step -->
-                <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div class="h-0.5 w-full bg-gray-200"></div>
-                </div>
-                <a href="#" class="group relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white hover:border-gray-400">
-                    <span class="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" aria-hidden="true"></span>
-                    <span class="sr-only">Step 5</span>
-                </a>
-                </li>
-            </ol>
-        </nav>
-    </x-slot>
+<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+    <div>
+        <a href="/">
+            <x-application-logo class="mt-10 h-20 w-auto fill-current text-gray-500" />
+        </a>
+    </div>
+    <header>
+        <div class="max-w-7xl mx-auto py-6 px-10 sm:px-6 lg:px-8">
+            <nav aria-label="Progress">
+                <ol role="list" class="flex items-center">
+                    @for($i = 0; $i < $total_steps; $i++)
+                        
+                        
+                        @if ($i !== $total_steps-1)
+                            <li class="relative pr-8 sm:pr-20">
+                        @else
+                            <li class="relative">
+                        @endif
+                        
+                        
+                            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                                <div class="h-0.5 w-full bg-gray-200"></div>
+                            </div>
+                        @if ($i == $step)
+                        
+                        <!-- Current Step -->
+                        
+                        <a class="relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-indigo-600 bg-white" aria-current="step">
+                            <span class="h-2.5 w-2.5 rounded-full bg-indigo-600" aria-hidden="true"></span>
+                        </a>
+                        @elseif ($i > $step) 
+                        <!-- Completed Step -->
+                        <a class="group relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white hover:border-gray-400">
+                            <span class="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" aria-hidden="true"></span>
+                        </a>
+                        @else
+                        <!-- Current Step -->
+                        <a href="#" class="relative flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-900">
+                            <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        @endif
+                        </li>
+                    @endfor
+                
+                </ol>
+            </nav>
+        </div>
+    </header>
+    <div class="w-full sm:max-w-4xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+    @if (count($players) < 12)
     <form wire:submit.prevent="submit">
                 @error('title')
                     <span class="text-danger">{{ $message }}</span>
@@ -133,6 +126,7 @@
         
         
     </form>
+    @endif
 
      <!-- Team -->
      <div class="mt-4">
@@ -142,14 +136,20 @@
             @if($players )
             <ul role="list" class="mx-auto mt-20 grid grid-cols-1 gap-x-8 gap-y-16 text-center sm:grid-cols-2 md:grid-cols-3 lg:mx-0 lg:max-w-none lg:grid-cols-4 xl:grid-cols-5">
                 @foreach ($players as $player)
-                <li>
+                <li class="relative group duration-300 transform cursor-pointer group hover:bg-blue-600 rounded-xl p-4">
+                <button wire:click.prevent="delete_player({{$loop->index}})" type="button" class="absolute top-0 right-0 mt-[-5px] mr-[-5px] rounded-full bg-red-600 p-1 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+
+                </button>
                     @if($player['photo'])
                     <img class="mx-auto h-24 w-24 rounded-full" src="{{ asset('storage/' . $player['photo']) }}" alt="">
                     @else
                     <img class="mx-auto h-24 w-24 rounded-full" src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=200" alt="">
                     @endif
                     <h3 class="relative inline-flex items-center gap-x-1.5 mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">
-                        {{$player['player_name']}} ({{$player['jersey_number']}})
+                    {{$player['player_name']}} ({{$player['jersey_number']}})
                         @if($player['is_libero'])
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -190,4 +190,5 @@
                 {{ __('Next') }}
             </x-primary-button>
         </div>
+</div>
 </div>

@@ -1,5 +1,3 @@
-<x-guest-layout>
-    
-
+<x-form-layout>
     @livewire('team')
-</x-guest-layout>
+</x-form-layout>

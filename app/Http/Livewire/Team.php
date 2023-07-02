@@ -4,14 +4,16 @@ namespace App\Http\Livewire;
  
 use Livewire\Component;
 use App\Models\Team as Teams;
+use App\Models\Official as Officials;
 use App\Models\Player as Players;
 use Livewire\WithFileUploads;
+use File;
 
 class Team extends Component
 {
     use WithFileUploads; 
 
-    public $current_team, $step;
+    public $current_team, $step = 0, $total_steps = 5;
     //team details
     public $name, $email, $phone, $logo;
     //player detail
@@ -20,8 +22,8 @@ class Team extends Component
     public $official_name, $official_type;
 
 
-    public $players = [];
-    public $officials = [];
+    public $players = [], $player;
+    public $officials = [], $official;
 
     public function save_team(){
         $validatedData = $this->validate([
@@ -63,6 +65,17 @@ class Team extends Component
         }
     }
 
+    public function delete_player($index)
+    {
+        $player = Players::find($this->players[$index]['id']);
+        if (File::exists(public_path('storage/'.$player->photo))) {
+            File::delete(public_path('storage/'.$player->photo));
+        }
+        $player->delete();
+        unset($this->players[$index]);
+        $this->players = array_values($this->players);
+    }
+
     public function save_official(){
         $validatedData = $this->validate([
             'official_name' => 'required',
@@ -83,6 +96,17 @@ class Team extends Component
         }
     }
 
+    public function delete_official($index)
+    {
+        $official = Officials::find($this->officials[$index]['id']);
+        if (File::exists(public_path('storage/'.$official->photo))) {
+            File::delete(public_path('storage/'.$official->photo));
+        }
+        $official->delete();
+        unset($this->officials[$index]);
+        $this->officials = array_values($this->officials);
+    }
+
 
     public function render()
     {
@@ -90,6 +114,7 @@ class Team extends Component
             case null | 0: return view('livewire.team');
             case 1: return view('livewire.player');
             case 2: return view('livewire.official');
+            case 3: return view('livewire.all');
         }
         
     }

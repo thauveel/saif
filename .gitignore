@@ -43,3 +43,5 @@ logs
 ssl
 tmp
 www
+.config
+.gitconfig

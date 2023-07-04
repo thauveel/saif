@@ -35,7 +35,7 @@
                         </a>
                         @else
                         <!-- Current Step -->
-                        <a href="#" class="relative flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-900">
+                        <a class="relative flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-900">
                             <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
                             </svg>
@@ -49,7 +49,33 @@
         </div>
     </header>
     <div class="w-full sm:max-w-4xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        @if($current_team)
+        <div class="mx-auto">
+            <div class="flex items-center space-x-5">
+            <div class="flex-shrink-0">
+                <div class="relative">
+                    @if($current_team['logo'])
+                        <img class="h-16 w-16 rounded-full" src="{{ asset('storage/' . $current_team['logo']) }}" alt="">
+                    @endif
+                    <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
+                </div>
+            </div>
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">{{$current_team->name}}</h1>
+                <p class="text-sm font-medium text-gray-500">{{$current_team->email}} | {{$current_team->phone}}</p>
+            </div>
+            </div>
+        </div>
 
+        <div class="flex items-center justify-end mt-4">
+            @if ($current_team->status == 'draft')
+            <x-primary-button wire:click.prevent="next_step()"  class="ml-4">
+                {{ __('Next') }}
+            </x-primary-button>
+            @endif
+        </div>
+
+        @else
         <form wire:submit.prevent="submit">
             @error('title')
                 <span class="text-danger">{{ $message }}</span>
@@ -89,12 +115,11 @@
                         @if($logo)
                         <img class="mx-auto h-12 w-auto" src="{{ $logo->temporaryUrl() }}">
                         @endif
-                        <div class="mt-4 flex text-sm leading-6 text-gray-600">
+                        <div class="mt-4 text-sm leading-6 text-gray-600">
                         <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                             <span>Upload a file</span>
                             <input id="file-upload" wire:model="logo" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg">
                         </label>
-                        <p class="pl-1">or drag and drop</p>
                         </div>
                         <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG up to 1MB</p>
                         <x-input-error :messages="$errors->get('logo')" class="mt-2" />
@@ -121,5 +146,6 @@
                 </x-primary-button>
             </div>
         </form>
+        @endif
     </div>
 </div>

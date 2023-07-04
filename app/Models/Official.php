@@ -11,7 +11,7 @@ class Official extends BaseModel
     use HasFactory;
 
     protected $fillable = [
-        'official_name', 'official_type', 'id_number', 'photo', 'team_id'
+        'official_name', 'official_type', 'id_number', 'photo', 'phone', 'team_id'
     ];
 
     public $timestamps = true;

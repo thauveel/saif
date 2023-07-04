@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('logo');
+            $table->string('status')->default('draft');
             $table->timestamps();
         });
     }

@@ -24,6 +24,7 @@ class Team extends Component
 
 
     public $players = [], $player;
+    public $playerss = [];
     public $officials = [], $official;
 
     public function save_team(){
@@ -31,7 +32,7 @@ class Team extends Component
             'name' => 'required',
             'email' => 'email|required',
             'phone' => 'required|numeric',
-            'logo'  => 'image|required|max:10000|mimes:png,svg,jpg'
+            'logo'  => 'image|required|max:10000|mimes:png,svg,jpg,jpeg,webp'
         ]);
 
         try {
@@ -59,22 +60,22 @@ class Team extends Component
             $player = $this->current_team->players()->create($validatedData);
             $player->photo = $temp_photo;
             $player->save();
-            $this->players[] = $player;
+            $this->players = $this->current_team->players()->get();;
             $this->resetFields();
         } catch (\Exception $ex) {
             session()->flash('error',$ex);
         }
     }
 
-    public function delete_player($index)
+    public function delete_player($id)
     {
-        $player = Players::find($this->players[$index]['id']);
+        //$this->player = $id;
+        $player = Players::find($id);
         if (File::exists(public_path('storage/'.$player->photo))) {
             File::delete(public_path('storage/'.$player->photo));
         }
         $player->delete();
-        unset($this->players[$index]);
-        $this->players = array_values($this->players);
+        $this->players =  Players::where('team_id',$this->current_team->id)->get();
     }
 
     public function save_official(){
@@ -82,6 +83,7 @@ class Team extends Component
             'official_name' => 'required',
             'official_type' => 'required',
             'id_number' => 'required',
+            'phone' => 'required',
             'photo'  => 'image|required|max:10000|mimes:png,svg,jpg'
         ]);
         $temp_photo = $this->photo->store('photo', 'public');
@@ -90,22 +92,21 @@ class Team extends Component
             $official = $this->current_team->officials()->create($validatedData);
             $official->photo = $temp_photo;
             $official->save();
-            $this->officials[] = $official;
+            $this->officials = $this->current_team->officials()->get();
             $this->resetFields();
         } catch (\Exception $ex) {
             session()->flash('error',$ex);
         }
     }
 
-    public function delete_official($index)
+    public function delete_official($id)
     {
-        $official = Officials::find($this->officials[$index]['id']);
+        $official = Officials::find($id);
         if (File::exists(public_path('storage/'.$official->photo))) {
             File::delete(public_path('storage/'.$official->photo));
         }
         $official->delete();
-        unset($this->officials[$index]);
-        $this->officials = array_values($this->officials);
+        $this->officials =  Officials::where('team_id',$this->current_team->id)->get();
     }
 
     /**
@@ -120,9 +121,28 @@ class Team extends Component
         if ($request->has('team')) 
         {
             $this->current_team = Teams::find($request->team);
-            $this->players =  $this->current_team->players()->get();
-            $this->officials = $this->current_team->officials()->get();
-            $this->step=1;
+            if (!$this->current_team){
+                abort(404);
+            }
+            $this->players = [];
+            $this->officials = [];
+            $this->players =  Players::where('team_id',$this->current_team->id)->get();
+            
+            $this->officials = Officials::where('team_id',$this->current_team->id)->get();
+            // if (count($this->current_team->players()->get()) < 5 )
+            // {
+            //     $this->step= 1;
+            // }else
+            // {
+            //     if (count($this->current_team->officials()->get()) < 3 ){
+            //         $this->step=2;
+            //     }
+                
+            // }
+
+            $this->step = 0;
+            
+            
         }
         
     }
@@ -134,6 +154,8 @@ class Team extends Component
             case 1: return view('livewire.player');
             case 2: return view('livewire.official');
             case 3: return view('livewire.all');
+            case 4: return view('livewire.tc');
+            case 5: return view('livewire.submitted');
         }
         
     }
@@ -143,6 +165,7 @@ class Team extends Component
         $this->player_name = '';
         $this->jersey_number = '';
         $this->id_number = '';
+        $this->phone = '';
         $this->photo = null;
         $this->is_libero = false;
         $this->official_name = '';
@@ -152,6 +175,29 @@ class Team extends Component
 
     public function next_step()
     {
+        $this->step++;
+        $this->players =  Players::where('team_id',$this->current_team->id)->get();
+        $this->officials = Officials::where('team_id',$this->current_team->id)->get();
+    }
+
+    public function previous_step()
+    {
+        $this->step--;
+        $this->players =  Players::where('team_id',$this->current_team->id)->get();
+        $this->officials = Officials::where('team_id',$this->current_team->id)->get();
+    }
+
+    public function set_step($step)
+    {
+        $this->step = $step;
+        $this->players =  Players::where('team_id',$this->current_team->id)->get();
+        $this->officials = Officials::where('team_id',$this->current_team->id)->get();
+    }
+
+    public function agree()
+    {
+        $this->current_team->status = 'submitted';
+        $this->current_team->save();
         $this->step++;
     }
 }

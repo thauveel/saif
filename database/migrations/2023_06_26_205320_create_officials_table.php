@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('official_name');
             $table->string('official_type')->nullable();
             $table->string('id_number');
+            $table->string('phone');
             $table->string('photo');
             $table->foreignUuid('team_id')->constrained();
             $table->timestamps();

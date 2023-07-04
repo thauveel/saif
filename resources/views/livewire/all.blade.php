@@ -8,7 +8,7 @@
         <div class="max-w-7xl mx-auto py-6 px-10 sm:px-6 lg:px-8">
             <nav aria-label="Progress">
                 <ol role="list" class="flex items-center">
-                    @for($i = 0; $i < $total_steps; $i++)
+                @for($i = 0; $i < $total_steps; $i++)
                         
                         
                         @if ($i !== $total_steps-1)
@@ -29,13 +29,13 @@
                             <span class="h-2.5 w-2.5 rounded-full bg-indigo-600" aria-hidden="true"></span>
                         </a>
                         @elseif ($i > $step) 
-                        <!-- Completed Step -->
+                        <!-- Upcoming Step -->
                         <a class="group relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white hover:border-gray-400">
                             <span class="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" aria-hidden="true"></span>
                         </a>
                         @else
                         <!-- Current Step -->
-                        <a href="#" class="relative flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-900">
+                        <a wire:click.prevent="set_step({{$i}})" class="relative flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-900">
                             <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
                             </svg>
@@ -65,7 +65,7 @@
             <p class="text-sm font-medium text-gray-500">{{$current_team->email}} | {{$current_team->phone}}</p>
           </div>
         </div>
-      </div>
+    </div>
 
 
         <!-- Team -->
@@ -77,12 +77,7 @@
                 <ul role="list" class="mx-auto mt-20 grid grid-cols-1 gap-x-8 gap-y-16 text-center sm:grid-cols-2 md:grid-cols-3 lg:mx-0 lg:max-w-none lg:grid-cols-4 xl:grid-cols-5">
                     @foreach ($players as $player)
                     <li class="relative group duration-300 transform cursor-pointer group hover:bg-blue-600 rounded-xl p-4">
-                    <button wire:click.prevent="delete_player({{$loop->index}})" type="button" class="absolute top-0 right-0 mt-[-5px] mr-[-5px] rounded-full bg-red-600 p-1 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
-                        <svg class="h-5 w-5" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-
-                    </button>
+                    
                         @if($player['photo'])
                         <img class="mx-auto h-24 w-24 rounded-full" src="{{ asset('storage/' . $player['photo']) }}" alt="">
                         @else
@@ -111,12 +106,7 @@
             <ul role="list" class="mx-auto mt-20 grid grid-cols-1 gap-x-8 gap-y-16 text-center sm:grid-cols-2 md:grid-cols-3 lg:mx-0 lg:max-w-none lg:grid-cols-4 xl:grid-cols-5">
                 @foreach ($officials as $official)
                 <li class="relative group duration-300 transform cursor-pointer group hover:bg-blue-600 rounded-xl p-4">
-                    <button wire:click.prevent="delete_official({{$loop->index}})" type="button" class="absolute top-0 right-0 mt-[-5px] mr-[-5px] rounded-full bg-red-600 p-1 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
-                        <svg class="h-5 w-5" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-
-                    </button>
+                    
                     @if($official['photo'])
                     <img class="mx-auto h-24 w-24 rounded-full" src="{{ asset('storage/' . $official['photo']) }}" alt="">
                     @else
@@ -133,6 +123,27 @@
             </ul>
             @endif 
         </div>
+
+        <div class="flex items-center justify-end mt-4">
+        @if(session()->has('success'))
+            <p class="alert alert-success" role="alert">
+                {{ session()->get('success') }}
+            </p>
+        @endif
+        @if(session()->has('error'))
+            <p class="alert alert-danger" role="alert">
+                {{ session()->get('error') }}
+            </p>
+        @endif
+        <x-primary-button wire:click.prevent="previous_step()"  class="ml-4">
+                {{ __('Back') }}
+            </x-primary-button>
+        @if (count($officials) >= 3 && count($players)>= 6)
+        <x-primary-button wire:click.prevent="next_step()"  class="ml-4">
+            {{ __('Next') }}
+        </x-primary-button>
+        @endif
+    </div>
 
 
 </div>

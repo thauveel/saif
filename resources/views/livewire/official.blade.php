@@ -29,13 +29,13 @@
                             <span class="h-2.5 w-2.5 rounded-full bg-indigo-600" aria-hidden="true"></span>
                         </a>
                         @elseif ($i > $step) 
-                        <!-- Completed Step -->
+                        <!-- Upcoming Step -->
                         <a class="group relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white hover:border-gray-400">
                             <span class="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" aria-hidden="true"></span>
                         </a>
                         @else
                         <!-- Current Step -->
-                        <a href="#" class="relative flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-900">
+                        <a wire:click.prevent="set_step({{$i}})" class="relative flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-900">
                             <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
                             </svg>
@@ -82,6 +82,13 @@
             <x-input-error :messages="$errors->get('id_number')" class="mt-2" />
         </div>
 
+        <!-- Phone Number -->
+        <div class="mt-4">
+            <x-input-label for="phone" :value="__('Phone')" />
+            <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" type="number"  :value="old('phone')" required autocomplete="phone" />
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+        </div>
+
         <!-- Photo -->
         <div class="mt-4">
             <x-input-label for="photo" :value="__('Photo')" />
@@ -95,12 +102,11 @@
                     @if($photo)
                     <img class="mx-auto h-12 w-auto" src="{{ $photo->temporaryUrl() }}">
                     @endif
-                    <div class="mt-4 flex text-sm leading-6 text-gray-600">
+                    <div class="mt-4 text-sm leading-6 text-gray-600">
                     <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                         <span>Upload a file</span>
                         <input id="file-upload" wire:model="photo" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg">
                     </label>
-                    <p class="pl-1">or drag and drop</p>
                     </div>
                     <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG up to 1MB</p>
                     <x-input-error :messages="$errors->get('photo')" class="mt-2" />
@@ -122,11 +128,11 @@
         <label class="block font-medium text-sm text-gray-700" for="players">
             Officials ({{count($officials)}})
         </label>
-            @if($officials )
+            @if($officials)
             <ul role="list" class="mx-auto mt-20 grid grid-cols-1 gap-x-8 gap-y-16 text-center sm:grid-cols-2 md:grid-cols-3 lg:mx-0 lg:max-w-none lg:grid-cols-4 xl:grid-cols-5">
                 @foreach ($officials as $official)
                 <li class="relative group duration-300 transform cursor-pointer group hover:bg-blue-600 rounded-xl p-4">
-                    <button wire:click.prevent="delete_official({{$loop->index}})" type="button" class="absolute top-0 right-0 mt-[-5px] mr-[-5px] rounded-full bg-red-600 p-1 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                    <button wire:click="delete_official('{{$official['id']}}')"  type="button" class="absolute top-0 right-0 mt-[-5px] mr-[-5px] rounded-full bg-red-600 p-1 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
                         <svg class="h-5 w-5" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -169,6 +175,9 @@
                 {{ session()->get('error') }}
             </p>
         @endif
+        <x-primary-button wire:click.prevent="previous_step()"  class="ml-4">
+                {{ __('Back') }}
+            </x-primary-button>
         @if (count($officials) >= 3)
         <x-primary-button wire:click.prevent="next_step()"  class="ml-4">
             {{ __('Next') }}

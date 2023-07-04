@@ -56,10 +56,11 @@
         <!-- Terms &  Conditions -->
         <div class="mt-4">
             <div class="flex flex-col items-center justify-center h-screen">
-                <svg class="w-16 h-16 text-purple-500 mb-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <h2 class="text-2xl font-bold mb-2">Form Submitted!</h2>
+            <svg class="checkmark mb-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+            </svg>
+                <h2 class="text-2xl font-bold mt-6 mb-2">Form Submitted!</h2>
                 <p class="text-gray-600">Thank you for submitting your application form.</p>
             </div>
         </div>

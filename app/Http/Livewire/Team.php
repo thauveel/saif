@@ -52,9 +52,14 @@ class Team extends Component
             'jersey_number' => 'numeric|required|min:1|max:21',
             'id_number' => 'required',
             'is_libero' => 'boolean',
-            'photo'  => 'image|required|max:10000|mimes:png,svg,jpg'
+            'photo'  => 'image|nullable|max:10000|mimes:png,svg,jpg'
         ]);
-        $temp_photo = $this->photo->store('photo', 'public');
+        if ($this->photo){
+            $temp_photo = $this->photo->store('photo', 'public');
+        }else{
+            $temp_photo = null;
+        }
+        
 
         try {
             $player = $this->current_team->players()->create($validatedData);
@@ -84,9 +89,14 @@ class Team extends Component
             'official_type' => 'required',
             'id_number' => 'required',
             'phone' => 'required',
-            'photo'  => 'image|required|max:10000|mimes:png,svg,jpg'
+            'photo'  => 'image|nullable|max:10000|mimes:png,svg,jpg'
         ]);
-        $temp_photo = $this->photo->store('photo', 'public');
+
+        if ($this->photo){
+            $temp_photo = $this->photo->store('photo', 'public');
+        }else{
+            $temp_photo = null;
+        }
 
         try {
             $official = $this->current_team->officials()->create($validatedData);
@@ -154,7 +164,7 @@ class Team extends Component
             case 1: return view('livewire.player');
             case 2: return view('livewire.official');
             case 3: return view('livewire.all');
-            case 4: return view('livewire.tc');
+            case 4: return view('livewire.tcdownloadble');
             case 5: return view('livewire.submitted');
         }
         

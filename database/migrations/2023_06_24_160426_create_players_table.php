@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('jersey_number')->nullable();
             $table->string('id_number');
             $table->boolean('is_libero')->default(0);
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->foreignUuid('team_id')->constrained();
             $table->timestamps();
         });

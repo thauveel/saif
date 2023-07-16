@@ -7,26 +7,21 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <dl class="grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
-          <div class="flex flex-col bg-blue-400 p-8">
-              <dt class="text-sm font-semibold leading-6 text-gray-600">Teams</dt>
-              <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">8,000+</dd>
-            </div>
-          
-            <div class="flex flex-col bg-fuchsia-400 p-8">
-              <dt class="text-sm font-semibold leading-6 text-gray-600">Players</dt>
-              <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">99.9%</dd>
-            </div>
-            <div class="flex flex-col bg-indigo-400 p-8">
-              <dt class="text-sm font-semibold leading-6 text-gray-600">Players</dt>
-              <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">99.9%</dd>
-            </div>
-          <div class="flex flex-col bg-violet-400 p-8">
-              <dt class="text-sm font-semibold leading-6 text-gray-600">Officials</dt>
-              <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">$70M</dd>
-            </div>
-          
-        </dl>
+        <dl class="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
+        <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+            <dt class="text-base leading-7 text-gray-600">Teams</dt>
+            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">{{$teams}}</dd>
+          </div>
+        <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+            <dt class="text-base leading-7 text-gray-600">Players</dt>
+            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">{{$players}}</dd>
+          </div>
+        <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+            <dt class="text-base leading-7 text-gray-600">Officials</dt>
+            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">{{$officials}}</dd>
+          </div>
+        
+      </dl>
         </div>
     </div>
 </x-app-layout>

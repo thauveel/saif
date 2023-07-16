@@ -38,7 +38,7 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        //
+        return view('teams.show', compact('team'));
     }
 
     /**

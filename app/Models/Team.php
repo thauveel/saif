@@ -39,7 +39,7 @@ class Team extends BaseModel
      */
     public function LatestPlayers()
     {
-        return $this->hasMany(Player::class);
+        return $this->hasMany(Player::class)->latest()->take(4);
     }
 
 }

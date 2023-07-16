@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="SAIF ">
-    <meta name="title" content="SAIF ">
-    <meta name="author" content="SAIF ">
+    <meta name="description" content="UCVL ">
+    <meta name="title" content="UCVL ">
+    <meta name="author" content="UCVL ">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="UC">
     <link rel="apple-touch-icon" sizes="57x57" href="/img/fav/apple-icon-57x57.png">
@@ -28,7 +28,7 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <title>
-    {{ config('app.name', 'Saif') }}
+    {{ config('app.name', 'UCVL') }}
     </title>
 
     <!-- Fonts -->

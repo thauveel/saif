@@ -42,8 +42,11 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-//generate links 
+//generate links s
 Route::get('generate', function (){
     \Illuminate\Support\Facades\Artisan::call('storage:link');
+    
+    \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
+
     echo 'ok';
 });

@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 //guest routes
 Route::name('front.')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('home');
-    Route::get('/livescore', [FrontController::class, 'livescore'])->name('home');
+    Route::get('/livescore', [FrontController::class, 'livescore'])->name('livescore');
     Route::get('apply', [FrontController::class, 'apply'])->name('apply');
     
     

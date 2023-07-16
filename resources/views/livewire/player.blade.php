@@ -188,7 +188,7 @@
             <x-primary-button wire:click.prevent="previous_step()"  class="ml-4">
                 {{ __('Back') }}
             </x-primary-button>
-            @if (count($players) >= 6)
+            @if (count($players) >= 8)
             <x-primary-button wire:click.prevent="next_step()"  class="ml-4">
                 {{ __('Next') }}
             </x-primary-button>

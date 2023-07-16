@@ -13,7 +13,8 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+        $teams = Team::paginate(5);
+        return view('teams.index', compact('teams'));
     }
 
     /**

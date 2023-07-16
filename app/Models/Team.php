@@ -33,4 +33,13 @@ class Team extends BaseModel
     {
         return $this->hasMany(Official::class);
     }
+
+    /**
+     * Get the 6 players for the team.
+     */
+    public function LatestPlayers()
+    {
+        return $this->hasMany(Player::class);
+    }
+
 }

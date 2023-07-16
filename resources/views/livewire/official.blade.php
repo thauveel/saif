@@ -49,7 +49,7 @@
         </div>
     </header>
 <div class="w-full sm:max-w-4xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-
+    @if (count($officials) < 5)
     <form wire:submit.prevent="submit">
                 @error('title')
                     <span class="text-danger">{{ $message }}</span>
@@ -122,6 +122,7 @@
             </x-primary-button>
         </div> 
     </form>
+    @endif
 
      <!-- Team -->
      <div class="mt-4">

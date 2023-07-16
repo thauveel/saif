@@ -14,7 +14,7 @@ class Team extends Component
 {
     use WithFileUploads; 
 
-    public $current_team, $step = 0, $total_steps = 5;
+    public $current_team, $step = 4, $total_steps = 5;
     //team details
     public $name, $email, $phone, $logo;
     //player detail

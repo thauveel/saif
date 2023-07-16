@@ -56,3 +56,11 @@
         box-shadow: inset 0px 0px 0px 30px #4bb71b;
     }
 }
+
+.txt-sdw {
+    text-shadow: 
+      1px 1px 0 rgb(156, 156, 156), 
+      -1px -1px 0 rgb(156, 156, 156),
+      1px -1px 0 rgb(156, 156, 156),
+      -1px 1px rgb(156, 156, 156);
+  }

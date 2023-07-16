@@ -12,6 +12,7 @@ class FrontController extends Controller
 
     public function livescore(){
         return 'livescore';
+        //te
     }
 
     public function apply(){

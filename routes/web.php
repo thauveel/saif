@@ -50,3 +50,12 @@ Route::get('generate', function (){
 
     echo 'ok';
 });
+
+//generate links s
+Route::get('dbseed', function (){
+    \Illuminate\Support\Facades\Artisan::call('db:seed DatabaseSeeder');
+    
+    // \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
+
+    echo 'ok';
+});

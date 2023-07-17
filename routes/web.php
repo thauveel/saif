@@ -44,8 +44,14 @@ require __DIR__.'/auth.php';
 //generate links s
 Route::get('generate', function (){
     \Illuminate\Support\Facades\Artisan::call('storage:link');
+
+    echo 'ok';
+});
+
+//generate links s
+Route::get('migrate111', function (){
     
-    \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
+    \Illuminate\Support\Facades\Artisan::call('migrate');
 
     echo 'ok';
 });

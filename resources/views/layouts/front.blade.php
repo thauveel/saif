@@ -52,7 +52,7 @@
         <div class="flex justify-center items-center">
             <a href="#" class="-m-1.5 p-1.5">
             <span class="sr-only">Your Company</span>
-            <img class="h-32 w-auto" src="/img/logo.png" alt="">
+            <img class="h-32 w-auto" src="/img/logo.svg" alt="">
             </a>
         </div>
         

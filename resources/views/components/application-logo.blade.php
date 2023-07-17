@@ -1,1 +1,1 @@
-<img src="/img/logo.png" {{ $attributes->merge(['class' => 'text-gray-500']) }}>
+<img src="/img/logo.svg" {{ $attributes->merge(['class' => 'text-gray-500']) }}>

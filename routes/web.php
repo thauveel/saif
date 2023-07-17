@@ -45,7 +45,7 @@ require __DIR__.'/auth.php';
 Route::get('generate', function (){
     \Illuminate\Support\Facades\Artisan::call('storage:link');
     
-    // \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
+    \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
 
     echo 'ok';
 });

@@ -56,6 +56,13 @@ Route::get('migrate111', function (){
     echo 'ok';
 });
 
+Route::get('clear', function (){
+    
+    \Illuminate\Support\Facades\Artisan::call('view:clear');
+
+    echo 'ok';
+});
+
 //generate links s
 Route::get('dbseed', function (){
     \Illuminate\Support\Facades\Artisan::call('db:seed DatabaseSeeder');

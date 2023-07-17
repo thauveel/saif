@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                    <img class="h-16 w-auto" src="/img/logo.svg" alt="">
+                    <x-application-logo class="h-16 w-auto" />
                     </a>
                 </div>
 
@@ -72,6 +72,9 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('teams.index')" :active="request()->routeIs('dashboard')">
+                {{ __('Teams') }}
             </x-responsive-nav-link>
         </div>
 

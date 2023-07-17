@@ -27,7 +27,7 @@
                         </a>
                         </p>
                         <p class="mt-1 flex text-xs leading-5 text-gray-500">
-                        <a href="mailto:{{$team->email}}" class="relative truncate hover:underline">{{$team->email}} | {{$team->phone}}</a>
+                        <a href="mailto:{{$team->email}}" class="relative truncate hover:underline">{{$team->email}} | {{$team->phone}} | {{$team->division}}</a>
                         </p>
                     </div>
                     </div>

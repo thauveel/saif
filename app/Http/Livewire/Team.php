@@ -16,7 +16,7 @@ class Team extends Component
 
     public $current_team, $step = 0, $total_steps = 5;
     //team details
-    public $name, $email, $phone, $logo;
+    public $name, $email, $division = 'men', $phone, $logo;
     //player detail
     public $player_name, $jersey_number, $id_number, $photo, $is_libero = false;
     //official details
@@ -32,6 +32,7 @@ class Team extends Component
             'name' => 'required',
             'email' => 'email|required',
             'phone' => 'required|numeric',
+            'division' => 'required|in:men,women',
             'logo'  => 'image|required|max:10000|mimes:png,svg,jpg,jpeg,webp'
         ]);
 
@@ -52,7 +53,7 @@ class Team extends Component
             'jersey_number' => 'numeric|required|min:1|max:21',
             'id_number' => 'required',
             'is_libero' => 'boolean',
-            'photo'  => 'image|nullable|max:10000|mimes:png,svg,jpg'
+            'photo'  => 'image|required|max:10000|mimes:png,svg,jpg'
         ]);
         if ($this->photo){
             $temp_photo = $this->photo->store('photo', 'public');
@@ -89,7 +90,7 @@ class Team extends Component
             'official_type' => 'required',
             'id_number' => 'required',
             'phone' => 'required',
-            'photo'  => 'image|nullable|max:10000|mimes:png,svg,jpg'
+            'photo'  => 'image|required|max:10000|mimes:png,svg,jpg'
         ]);
 
         if ($this->photo){

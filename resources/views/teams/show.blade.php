@@ -10,7 +10,7 @@
                 </div>
                 <div>
                     <h1 class="text-2xl font-bold text-gray-900">{{$team->name}}</h1>
-                    <p class="text-sm font-medium text-gray-500">{{$team->email}} | {{$team->phone}}</p>
+                    <p class="text-sm font-medium text-gray-500">{{$team->email}} | {{$team->phone}} | {{$team->division}}</p>
                 </div>
             </div>
             <div

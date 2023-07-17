@@ -13,7 +13,7 @@ class Team extends BaseModel
     use HasFactory;
 
     protected $fillable = [
-        'name', 'email', 'phone', 'logo', 'status'
+        'name', 'email', 'phone', 'logo', 'status', 'division'
     ];
 
     public $timestamps = true;

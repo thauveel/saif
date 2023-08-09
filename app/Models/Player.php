@@ -13,7 +13,7 @@ class Player extends BaseModel
     use HasFactory;
 
     protected $fillable = [
-        'player_name', 'jersey_number', 'id_number', 'photo', 'team_id', 'is_libero'
+        'player_name', 'jersey_number', 'id_number', 'photo', 'team_id', 'is_libero', 'consent'
     ];
 
     public $timestamps = true;

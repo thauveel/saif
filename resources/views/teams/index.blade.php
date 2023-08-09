@@ -55,9 +55,11 @@
 
         </div>
 
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white">
-            {{$teams->links}}
-        </div>
+        
 
     </div>
+
+    <div class="max-w-7xl py-10 mx-auto sm:px-6 lg:px-8 bg-white">
+            {{$teams->links()}}
+        </div>
 </x-app-layout>

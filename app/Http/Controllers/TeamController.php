@@ -38,7 +38,16 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        return view('teams.show', compact('team'));
+        $resubmitlink = "/apply?team=".$team->id;
+        return view('teams.show', compact('team','resubmitlink'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function print(Team $team)
+    {
+        return view('teams.print', compact('team'));
     }
 
     /**
@@ -62,6 +71,10 @@ class TeamController extends Controller
      */
     public function destroy(Team $team)
     {
-        //
+        $team->players()->delete();
+        $team->officials()->delete();
+        $team->delete();
+
+        return redirect(route('teams.index'));
     }
 }

@@ -18,7 +18,7 @@ class Team extends Component
     //team details
     public $name, $email, $division = 'men', $phone, $logo;
     //player detail
-    public $player_name, $jersey_number, $id_number, $photo, $is_libero = false;
+    public $player_name, $jersey_number, $id_number, $photo, $is_libero = false, $consent;
     //official details
     public $official_name, $official_type;
 
@@ -53,7 +53,8 @@ class Team extends Component
             'jersey_number' => 'numeric|required|min:1|max:21',
             'id_number' => 'required',
             'is_libero' => 'boolean',
-            'photo'  => 'image|required|max:10000|mimes:png,svg,jpg'
+            'photo'  => 'image|required|max:10000|mimes:png,svg,jpg',
+            'consent'  => 'nullable|max:10000|mimes:png,svg,jpg,pdf'
         ]);
         if ($this->photo){
             $temp_photo = $this->photo->store('photo', 'public');
@@ -61,10 +62,16 @@ class Team extends Component
             $temp_photo = null;
         }
         
+        if ($this->consent){
+            $consent = $this->consent->store('consent', 'public');
+        }else{
+            $consent = null;
+        }
 
         try {
             $player = $this->current_team->players()->create($validatedData);
             $player->photo = $temp_photo;
+            $player->consent = $consent;
             $player->save();
             $this->players = $this->current_team->players()->get();;
             $this->resetFields();
@@ -181,6 +188,7 @@ class Team extends Component
         $this->is_libero = false;
         $this->official_name = '';
         $this->official_type = '';
+        $this->consent = null;
 
     }
 

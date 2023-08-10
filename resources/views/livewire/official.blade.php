@@ -68,9 +68,9 @@
                 <option>----</option>
                 <option value="manager">Manager</option>
                 <option value="coach">Coach</option>
+                <option value="assistant coach">Assistant Coach</option>
                 <option value="trainer">Trainer</option>
-                <option value="official">Official</option>
-                <option value="medical">Medical</option>
+                <option value="medical assistant">Medical Assistant</option>
               </select>
               <x-input-error :messages="$errors->get('official_type')" class="mt-2" />
         </div>

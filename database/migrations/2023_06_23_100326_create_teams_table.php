@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('logo');
             $table->string('status')->default('draft');
+            $table->enum('division', ['men', 'women'])->nullable();
+            $table->foreignUuid('tournament_id');
             $table->timestamps();
         });
     }

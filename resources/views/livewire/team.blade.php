@@ -1,9 +1,15 @@
 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
     <div>
         <a href="/">
-            <x-application-logo class="mt-10 h-20 w-auto fill-current text-gray-500" />
+            @if($tournament->logo)
+            <img src="{{ $tournament->logo }}" class="mt-10 h-20 w-auto fill-current text-gray-500" />
+            @else
+            <img src="/logo.png" class="mt-10 h-20 w-auto fill-current text-gray-500" />
+            @endif
         </a>
+        
     </div>
+    <h2 class="my-4 text-2xl font-bold text-blue-950 md:text-3xl">{{ $tournament->name }}</h2>
     <header>
         <div class="max-w-7xl mx-auto py-6 px-10 sm:px-6 lg:px-8">
             <nav aria-label="Progress">
@@ -101,6 +107,7 @@
                 <x-input-error :messages="$errors->get('phone')" class="mt-2" />
             </div>
 
+            @if($tournament->is_divisible)
             <!-- Division -->
             <div class="mt-4">
                 <x-input-label for="division" :value="__('Division')" />
@@ -112,6 +119,7 @@
               </div>
                 <x-input-error :messages="$errors->get('division')" class="mt-2" />
             </div>
+            @endif
 
             <!-- Logo -->
             <div class="mt-4">

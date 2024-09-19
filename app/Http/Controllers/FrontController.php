@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tournament;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
     public function index(){
-        return view('home');
+        $tournaments = Tournament::where('status' , '!=', 'draft')->get();
+        return view('home', compact('tournaments'));
     }
 
     public function livescore(){
@@ -15,7 +17,14 @@ class FrontController extends Controller
         //te
     }
 
-    public function apply(){
-        return view('application');
+    public function create(Tournament $tournament){
+        if($tournament->status == 'open')
+        {
+            return view('application', compact('tournament'));
+        }
+        else{
+            abort(404);
+        }
+        
     }
 }

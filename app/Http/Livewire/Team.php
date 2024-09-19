@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Team as Teams;
 use App\Models\Official as Officials;
 use App\Models\Player as Players;
+use App\Models\Tournament;
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
 use File;
@@ -13,6 +14,8 @@ use File;
 class Team extends Component
 {
     use WithFileUploads; 
+
+    public $tournament;
 
     public $current_team, $step = 0, $total_steps = 5;
     //team details
@@ -33,12 +36,14 @@ class Team extends Component
             'email' => 'email|required',
             'phone' => 'required|numeric',
             'division' => 'required|in:men,women',
-            'logo'  => 'image|required|max:10000|mimes:png,svg,jpg,jpeg,webp'
+            'logo'  => 'image|required|max:10000|mimes:png,svg,jpg,jpeg,webp',
         ]);
 
         try {
+            $validatedData = array_merge($validatedData, ['tournament_id' => Tournament::first()->id]);
+            
             $temp_logo = $this->logo->store('logo', 'public');
-            $this->current_team = Teams::create($validatedData);
+            $this->current_team = $this->tournament->teams()->create($validatedData);
             $this->current_team->logo = $temp_logo;
             $this->current_team->save();
             $this->step++;
@@ -134,7 +139,7 @@ class Team extends Component
      * @return \Illuminate\Http\Response
      */
 
-    public function mount(Request $request)
+    public function mount(Request $request, Tournament $tournament)
     {
         if ($request->has('team')) 
         {
@@ -147,21 +152,13 @@ class Team extends Component
             $this->players =  Players::where('team_id',$this->current_team->id)->get();
             
             $this->officials = Officials::where('team_id',$this->current_team->id)->get();
-            // if (count($this->current_team->players()->get()) < 5 )
-            // {
-            //     $this->step= 1;
-            // }else
-            // {
-            //     if (count($this->current_team->officials()->get()) < 3 ){
-            //         $this->step=2;
-            //     }
-                
-            // }
 
             $this->step = 0;
             
             
         }
+
+        $this->tournament = $tournament;
         
     }
 

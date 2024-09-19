@@ -1,3 +1,3 @@
 <x-form-layout>
-    @livewire('team')
+    <livewire:team :tournament="$tournament" />
 </x-form-layout>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\BaseModel;
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Team extends BaseModel
 {
@@ -17,6 +17,14 @@ class Team extends BaseModel
     ];
 
     public $timestamps = true;
+
+    /**
+     * Get the tournament for the team.
+     */
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Tournament::class);
+    }
 
     /**
      * Get the playes for the team.

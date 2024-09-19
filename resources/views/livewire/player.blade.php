@@ -49,7 +49,7 @@
         </div>
     </header>
     <div class="w-full sm:max-w-4xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-    @if (count($players) < 12)
+    @if (count($players) < $tournament->max_players)
     <form wire:submit.prevent="submit">
                 @error('title')
                     <span class="text-danger">{{ $message }}</span>
@@ -67,10 +67,12 @@
             <div class="flex items-center justify-between">
                 <x-input-label for="jersey_number" :value="__('Jersey Number')" />
                 <div>
-                <label for="is_libero" class="inline-flex items-center">
-                    <input id="is_libero" wire:model="is_libero" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="is_libero">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Libero') }}</span>
-                </label>
+                    @if($tournament->is_libero_included)
+                    <label for="is_libero" class="inline-flex items-center">
+                        <input id="is_libero" wire:model="is_libero" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="is_libero">
+                        <span class="ml-2 text-sm text-gray-600">{{ __('Libero') }}</span>
+                    </label>
+                    @endif
                 </div>
             </div>
             <x-text-input wire:model="jersey_number" id="jersey_number" class="block mt-1 w-full" type="number" min="1" max="21" :value="old('jersey_number')" required autocomplete="jersey_number" />
@@ -173,9 +175,9 @@
 
                 </button>
                     @if($player['photo'])
-                    <img class="mx-auto h-24 w-24 rounded-full" src="{{ asset('storage/' . $player['photo']) }}" alt="">
+                    <img class="mx-auto h-24 w-24 rounded-full object-cover" src="{{ asset('storage/' . $player['photo']) }}" alt="">
                     @else
-                    <img class="mx-auto h-24 w-24 rounded-full" src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=200" alt="">
+                    <img class="mx-auto h-24 w-24 rounded-full object-cover" src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=200" alt="">
                     @endif
                     <h3 class="relative inline-flex items-center gap-x-1.5 mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">
                     {{$player['player_name']}} ({{$player['jersey_number']}})

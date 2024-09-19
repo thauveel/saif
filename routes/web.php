@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TournamentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::name('front.')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('home');
     Route::get('/livescore', [FrontController::class, 'livescore'])->name('livescore');
-    // Route::get('apply', [FrontController::class, 'apply'])->name('apply');
+    Route::get('{tournament:slug}/apply', [FrontController::class, 'create'])->name('apply');
     
     
 
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('teams', TeamController::class);
+    Route::resource('tournaments', TournamentController::class);
 });
 
 require __DIR__.'/auth.php';
@@ -49,7 +51,7 @@ Route::get('generate', function (){
 });
 
 //generate links s
-Route::get('migrate111', function (){
+Route::get('install', function (){
     
     \Illuminate\Support\Facades\Artisan::call('migrate');
 

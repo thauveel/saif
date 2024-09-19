@@ -49,7 +49,7 @@
         </div>
     </header>
 <div class="w-full sm:max-w-4xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-    @if (count($officials) < 5)
+    @if (count($officials) < $tournament->max_officials)
     <form wire:submit.prevent="submit">
                 @error('title')
                     <span class="text-danger">{{ $message }}</span>
@@ -140,9 +140,9 @@
 
                     </button>
                     @if($official['photo'])
-                    <img class="mx-auto h-24 w-24 rounded-full" src="{{ asset('storage/' . $official['photo']) }}" alt="">
+                    <img class="mx-auto h-24 w-24 rounded-full object-cover" src="{{ asset('storage/' . $official['photo']) }}" alt="">
                     @else
-                    <img class="mx-auto h-24 w-24 rounded-full" src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=200" alt="">
+                    <img class="mx-auto h-24 w-24 rounded-full object-cover" src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=200" alt="">
                     @endif
                     <h3 class="relative inline-flex items-center gap-x-1.5 mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">
                         {{$official['official_name']}} ({{$official['official_type']}})

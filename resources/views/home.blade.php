@@ -14,7 +14,7 @@
         <h1 class="text-4xl font-bold text-black txt-sdw  sm:text-6xl leading-10">Ungoofaaru Council Volleyball League 2023</h1>
         <!-- <p class="mt-6 text-lg leading-8 text-gray-900">Experience the thrill of competitive volleyball as resorts battle it out in our exhilarating inter-resort championship. Join us for a spirited display of skill, teamwork, and sportsmanship!</p> -->
         <div class="mt-10 flex items-center justify-center gap-x-6">
-          <!-- <a href="{{route('front.apply')}}" class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">Get started</a>
+          <!-- <a href="#" class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">Get started</a>
            -->
         </div>
       </div>

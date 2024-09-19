@@ -21,7 +21,7 @@ class Team extends Component
     //team details
     public $name, $email, $division = 'men', $phone, $logo;
     //player detail
-    public $player_name, $jersey_number, $id_number, $photo, $is_libero = false, $consent;
+    public $player_name, $jersey_number, $id_number, $photo, $is_libero = false, $verification_document;
     //official details
     public $official_name, $official_type;
 
@@ -59,7 +59,7 @@ class Team extends Component
             'id_number' => 'required',
             'is_libero' => 'boolean',
             'photo'  => 'image|required|max:10000|mimes:png,svg,jpg',
-            'consent'  => 'nullable|max:10000|mimes:png,svg,jpg,pdf'
+            'verification_document'  => 'nullable|max:10000|mimes:png,svg,jpg,pdf'
         ]);
         if ($this->photo){
             $temp_photo = $this->photo->store('photo', 'public');
@@ -67,16 +67,16 @@ class Team extends Component
             $temp_photo = null;
         }
         
-        if ($this->consent){
-            $consent = $this->consent->store('consent', 'public');
+        if ($this->verification_document){
+            $verification_document = $this->verification_document->store('verification_document', 'public');
         }else{
-            $consent = null;
+            $verification_document = null;
         }
 
         try {
             $player = $this->current_team->players()->create($validatedData);
             $player->photo = $temp_photo;
-            $player->consent = $consent;
+            $player->verification_document = $verification_document;
             $player->save();
             $this->players = $this->current_team->players()->get();;
             $this->resetFields();
@@ -132,13 +132,6 @@ class Team extends Component
         $this->officials =  Officials::where('team_id',$this->current_team->id)->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
     public function mount(Request $request, Tournament $tournament)
     {
         if ($request->has('team')) 
@@ -185,7 +178,7 @@ class Team extends Component
         $this->is_libero = false;
         $this->official_name = '';
         $this->official_type = '';
-        $this->consent = null;
+        $this->verification_document = null;
 
     }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('id_number');
             $table->boolean('is_libero')->default(0);
             $table->string('photo')->nullable();
+            $table->string('verification_document')->nullable();
             $table->foreignUuid('team_id')->constrained();
             $table->timestamps();
         });

@@ -25,7 +25,7 @@ Route::name('front.')->group(function () {
         \Illuminate\Support\Facades\Artisan::call('view:clear');
         \Illuminate\Support\Facades\Artisan::call('storage:link');
         \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
-        \Illuminate\Support\Facades\Artisan::call('db:seed DatabaseSeeder');
+        // \Illuminate\Support\Facades\Artisan::call('db:seed DatabaseSeeder');
         
     
         echo 'ok';

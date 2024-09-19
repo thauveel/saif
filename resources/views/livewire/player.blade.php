@@ -1,9 +1,15 @@
 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
     <div>
         <a href="/">
-            <x-application-logo class="mt-10 h-20 w-auto fill-current text-gray-500" />
+            @if($tournament->logo)
+            <img src="{{ $tournament->logo }}" class="mt-10 h-20 w-auto fill-current text-gray-500" />
+            @else
+            <img src="/logo.png" class="mt-10 h-20 w-auto fill-current text-gray-500" />
+            @endif
         </a>
+        
     </div>
+    <h2 class="my-4 text-2xl font-bold text-blue-950 md:text-3xl">{{ $tournament->name }}</h2>
     <header>
         <div class="max-w-7xl mx-auto py-6 px-10 sm:px-6 lg:px-8">
             <nav aria-label="Progress">
@@ -75,7 +81,7 @@
                     @endif
                 </div>
             </div>
-            <x-text-input wire:model="jersey_number" id="jersey_number" class="block mt-1 w-full" type="number" min="1" max="21" :value="old('jersey_number')" required autocomplete="jersey_number" />
+            <x-text-input wire:model="jersey_number" id="jersey_number" class="block mt-1 w-full" type="number" min="1" max="{{ $tournament->max_jersey_no}}" :value="old('jersey_number')" required autocomplete="jersey_number" />
             <x-input-error :messages="$errors->get('jersey_number')" class="mt-2" />
         </div>
 
@@ -114,17 +120,17 @@
         </div>
 
         <div class="mt-4">
-            <x-input-label for="photo" :value="__('No-Objection Letter')" />
+            <x-input-label for="photo" :value="__('Verification Documents')" />
             
 
             <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                 <div class="text-center">
-                    @if(!$verification_docuemnt)
+                    @if(!$verification_document)
                     <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
                     </svg>
                     @endif
-                    @if($consent)
+                    @if($verification_document)
                     <svg class="mx-auto h-12 w-12 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -136,8 +142,8 @@
                         <input id="file-upload2" wire:model="verification_document" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg, application/pdf">
                     </label>
                     </div>
-                    <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG , PDF up to 1MB</p>
-                    <p class="text-xs font-bold leading-5 text-red-600">Note: No-Objection letter is required for ONLY for Students.</p>
+                    <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG , PDF up to 4MB</p>
+                    <p class="text-xs font-bold leading-5 text-red-600">Note: Verification documents include National ID, Marriage Cetficate and No-Objection letter</p>
                     <x-input-error :messages="$errors->get('verification_document')" class="mt-2" />
                 </div>
             </div>

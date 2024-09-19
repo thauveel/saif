@@ -53,7 +53,7 @@ Route::get('generate', function (){
 //generate links s
 Route::get('install', function (){
     
-    \Illuminate\Support\Facades\Artisan::call('migrate');
+    // \Illuminate\Support\Facades\Artisan::call('migrate');
 
     echo 'ok';
 });

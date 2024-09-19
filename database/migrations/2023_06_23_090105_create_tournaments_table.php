@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string(column: 'type')->default('volleyball');
             $table->integer('max_players')->default(14);
             $table->integer('max_officials')->default(4);
+            $table->integer('max_jersey_no')->default(21);
             $table->boolean('is_divisible')->default(false);
             $table->boolean('is_libero_included')->default(false);
             $table->timestamps();

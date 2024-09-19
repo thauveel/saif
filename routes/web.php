@@ -20,17 +20,17 @@ use Illuminate\Support\Facades\Route;
 
 //guest routes
 Route::name('front.')->group(function () {
-    Route::get('/', function (){
-        \Illuminate\Support\Facades\Artisan::call('route:cache');
-        \Illuminate\Support\Facades\Artisan::call('view:clear');
-        \Illuminate\Support\Facades\Artisan::call('storage:link');
-        \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
-        // \Illuminate\Support\Facades\Artisan::call('db:seed DatabaseSeeder');
+    // Route::get('/', function (){
+    //     \Illuminate\Support\Facades\Artisan::call('route:cache');
+    //     \Illuminate\Support\Facades\Artisan::call('view:clear');
+    //     \Illuminate\Support\Facades\Artisan::call('storage:link');
+    //     \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
+    //     // \Illuminate\Support\Facades\Artisan::call('db:seed DatabaseSeeder');
         
     
-        echo 'ok';
-    });
-    // Route::get('/', [FrontController::class, 'index'])->name('home');
+    //     echo 'ok';
+    // });
+    Route::get('/', [FrontController::class, 'index'])->name('home');
     Route::get('/livescore', [FrontController::class, 'livescore'])->name('livescore');
     Route::get('{tournament:slug}/apply', [FrontController::class, 'create'])->name('apply');
     

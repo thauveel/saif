@@ -123,7 +123,7 @@
                 </svg>
             </a>
             </div>
-            <p class="mt-10 text-center text-xs leading-5 text-gray-500">&copy; 2020 Your Company, Inc. All rights reserved.</p>
+            <ped class="mt-10 text-center text-xs leading-5 text-gray-500">&copy; 2020 Raa Atoll Council Inc. All rights reserved. Devloped by Thauveel</p>
         </div>
     </footer>
     @livewireScripts

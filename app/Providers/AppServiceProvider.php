@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Livewire\Livewire;
-use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,8 +27,5 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         //livewire 
-        Livewire::setScriptRoute(function ($handle) {
-            return Route::get('/vendor/livewire/livewire.js', $handle);
-        });
     }
 }

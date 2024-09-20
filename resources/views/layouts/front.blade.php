@@ -41,6 +41,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
+    @livewireScripts
 </head>
 
 <body class="bg-white ">
@@ -57,7 +58,7 @@
                     <img class="w-32 h-auto relative" src="/logo.png"/>
                     </div>
                     <h1 class="text-gray-900 font-bold text-5xl md:text-6xl xl:text-7xl">Join the Action at RAC <span class="text-[#07bab4]">Tournament Portal</span></h1>
-                    <p class="mt-8 text-gray-700">Browse through our list of exciting tournaments. Find the perfect challenge for your team and register to compete for glory. Stay updated on dates, formats, and rules to get ahead of the competition!</p>
+                    <p class="mt-8 text-gray-700">Browse through our list of exciting tournaments. Find the perfect challenge for your team and register to compete for glory. Stay updated on dates, formats, and rules to get ahead of the competition!!</p>
                    
                 </div>
             </div>
@@ -126,7 +127,7 @@
             <ped class="mt-10 text-center text-xs leading-5 text-gray-500">&copy; 2020 Raa Atoll Council Inc. All rights reserved. Devloped by Thauveel</p>
         </div>
     </footer>
-    @livewireScripts
+    
 </body>
 
 </html>

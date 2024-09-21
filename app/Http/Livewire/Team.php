@@ -40,7 +40,7 @@ class Team extends Component
         ]);
 
         try {
-            $validatedData = array_merge($validatedData, ['tournament_id' => Tournament::first()->id]);
+            $validatedData = array_merge($validatedData, ['tournament_id' => Tournament::first()->id, 'status' => 'draft']);
             
             $temp_logo = $this->logo->store('logo', 'public');
             $this->current_team = $this->tournament->teams()->create($validatedData);

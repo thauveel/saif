@@ -59,7 +59,7 @@ class Team extends Component
             'id_number' => 'required',
             'is_libero' => 'boolean',
             'photo'  => 'image|required|max:10000|mimes:png,svg,jpg',
-            'verification_document'  => 'nullable|max:50000|mimes:png,svg,jpg,pdf'
+            'verification_document'  => 'required|max:50000|mimes:png,svg,jpg,pdf'
         ]);
         if ($this->photo){
             $temp_photo = $this->photo->store('photo', 'public');

@@ -21,6 +21,7 @@ class Tournament extends BaseModel
      */
     protected $casts = [
         'due_date' => 'date:d-M-Y',
+        'date' => 'date:d-M-Y',
     ];
 
     /**

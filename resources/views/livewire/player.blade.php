@@ -55,6 +55,28 @@
         </div>
     </header>
     <div class="w-full sm:max-w-4xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        <div class="mx-auto mb-4">
+            <div class="flex items-center justify-between space-x-5">
+                <div class="flex items-center space-x-5">
+                    <div class="flex-shrink-0">
+                        <div class="relative">
+                            @if($current_team['logo'])
+                                <img class="h-16 w-16 rounded-full ring-1 ring-gray-900/1" src="{{ asset('storage/' . $current_team['logo']) }}" alt="">
+                            @endif
+                            <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">{{$current_team->name}}</h1>
+                        <p class="text-sm font-medium text-gray-500">{{$current_team->email}} | {{$current_team->phone}}</p>
+                    </div>
+                </div>
+                
+                <div class="order-first flex-none rounded-full bg-indigo-400/10 px-2 py-1 text-xs font-medium text-indigo-400 ring-1 ring-inset ring-indigo-400/30 sm:order-none">{{ Str::ucfirst($current_team->status) }}</div>
+            </div>
+            
+        </div>
+        
     @if (count($players) < $tournament->max_players)
     <form wire:submit.prevent="submit">
                 @error('title')
@@ -134,10 +156,10 @@
                     </svg>
                     @endif
                     @if($verification_document)
-                    <svg class="mx-auto h-12 w-12 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg class="checkmark_upload mx-auto h-12 w-12 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
                     </svg>
-
                     @endif
                     <div class="mt-4 text-sm leading-6 text-gray-600">
                     <label for="file-upload2" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">

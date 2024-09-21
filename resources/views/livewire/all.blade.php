@@ -56,21 +56,26 @@
     </header>
     <div class="w-full sm:max-w-4xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
         
-    <div class="mx-auto">
-        <div class="flex items-center space-x-5">
-          <div class="flex-shrink-0">
-            <div class="relative">
-                @if($current_team['logo'])
-                    <img class="h-16 w-16 rounded-full" src="{{ asset('storage/' . $current_team['logo']) }}" alt="">
-                @endif
-                <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
+    <div class="mx-auto mb-4">
+        <div class="flex items-center justify-between space-x-5">
+            <div class="flex items-center space-x-5">
+                <div class="flex-shrink-0">
+                    <div class="relative">
+                        @if($current_team['logo'])
+                            <img class="h-16 w-16 rounded-full ring-1 ring-gray-900/1" src="{{ asset('storage/' . $current_team['logo']) }}" alt="">
+                        @endif
+                        <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">{{$current_team->name}}</h1>
+                    <p class="text-sm font-medium text-gray-500">{{$current_team->email}} | {{$current_team->phone}}</p>
+                </div>
             </div>
-          </div>
-          <div>
-            <h1 class="text-2xl font-bold text-gray-900">{{$current_team->name}}</h1>
-            <p class="text-sm font-medium text-gray-500">{{$current_team->email}} | {{$current_team->phone}}</p>
-          </div>
+            
+            <div class="order-first flex-none rounded-full bg-indigo-400/10 px-2 py-1 text-xs font-medium text-indigo-400 ring-1 ring-inset ring-indigo-400/30 sm:order-none">{{ Str::ucfirst($current_team->status) }}</div>
         </div>
+        
     </div>
 
 

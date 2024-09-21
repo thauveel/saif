@@ -133,7 +133,10 @@
                         </svg>
                         @endif
                         @if($logo)
-                        <img class="mx-auto h-12 w-auto" src="{{ $logo->temporaryUrl() }}">
+                        <svg class="checkmark_upload mx-auto h-12 w-12 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                        </svg>
                         @endif
                         <div class="mt-4 text-sm leading-6 text-gray-600">
                         <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">

@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             'type' => 'volleyball',
             'max_players' => 15,
             'max_officials' => 5,
-            'max_jersey_no' => 99
+            'max_jersey_no' => 21
         ]);
 
         DB::table('tournaments')->insert([
@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             'type' => 'handball',
             'max_players' => 14,
             'max_officials' => 4,
-            'max_jersey_no' => 21
+            'max_jersey_no' => 99
         ]);
     }
 }

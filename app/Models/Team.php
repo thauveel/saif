@@ -21,7 +21,7 @@ class Team extends BaseModel
     /**
      * Get the tournament for the team.
      */
-    public function team(): BelongsTo
+    public function tournament(): BelongsTo
     {
         return $this->belongsTo(Tournament::class);
     }
@@ -49,5 +49,6 @@ class Team extends BaseModel
     {
         return $this->hasMany(Player::class)->latest()->take(4);
     }
+    
 
 }

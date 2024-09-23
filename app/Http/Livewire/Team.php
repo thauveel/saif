@@ -16,6 +16,7 @@ class Team extends Component
     use WithFileUploads; 
 
     public $tournament;
+    
 
     public $current_team, $step = 0, $total_steps = 5;
     //team details
@@ -55,7 +56,7 @@ class Team extends Component
     public function save_player(){
         $validatedData = $this->validate([
             'player_name' => 'required',
-            'jersey_number' => 'numeric|required|min:1|max:21',
+            'jersey_number' => 'numeric|required|min:1|max:'.$this->tournament->max_jersey_no,
             'id_number' => 'required',
             'is_libero' => 'boolean',
             'photo'  => 'image|required|max:10000|mimes:png,svg,jpg',
@@ -157,6 +158,7 @@ class Team extends Component
 
     public function render()
     {
+        
         switch ($this->step) {
             case null | 0: return view('livewire.team');
             case 1: return view('livewire.player');

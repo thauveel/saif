@@ -59,7 +59,7 @@
         <livewire:team-card-small :team="$current_team"/>
 
         <div class="flex items-center justify-end mt-4">
-            @if ($current_team->status == 'draft')
+            @if ($current_team->status <> 'approved')
             <x-primary-button wire:click.prevent="next_step()"  class="ml-4">
                 {{ __('Next') }}
             </x-primary-button>

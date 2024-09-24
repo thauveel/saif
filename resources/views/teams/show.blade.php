@@ -37,9 +37,9 @@
                             <span>Print</span>
                         </button>
 
-                        @if($team->status <> 'submitted')
+                        @if($team->status <> 'approved')
 
-                        <a href="/apply?team={{$team->id}}" target="_blank"  class="flex items-center px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 gap-x-3 hover:bg-gray-100">
+                        <a href="{{ route('front.apply', $team->tournament) }}?team={{$team->id}}" target="_blank"  class="flex items-center px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 gap-x-3 hover:bg-gray-100">
                             
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
@@ -49,7 +49,7 @@
                         </a>
 
                         @endif
-                        <form name="team-{{$team->id}}" action="{{route('teams.destroy',compact('team'))}}"
+                        <form name="team-{{$team->id}}" action="{{route('teams.destroy', [$team->tournament, $team])}}"
                         method="POST">
                         @csrf
                         @method('DELETE')

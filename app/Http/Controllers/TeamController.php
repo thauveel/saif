@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTeamRequest;
 use App\Http\Requests\UpdateTeamRequest;
 use App\Models\Team;
+use App\Models\Tournament;
 
 class TeamController extends Controller
 {
@@ -36,9 +37,9 @@ class TeamController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Team $team)
+    public function show(Tournament $tournament, Team $team)
     {
-        $resubmitlink = "/apply?team=".$team->id;
+        $resubmitlink = $tournament->slug."/apply?team=".$team->id;
         return view('teams.show', compact('team','resubmitlink'));
     }
 
@@ -69,7 +70,7 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Team $team)
+    public function destroy(Tournament $tournament, Team $team)
     {
         $team->players()->delete();
         $team->officials()->delete();

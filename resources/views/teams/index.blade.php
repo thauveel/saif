@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Teams') }}
+            {{ $tournament->name }} -> {{ __('Teams') }}
         </h2>
     </x-slot>
 
@@ -21,7 +21,7 @@
                     </span>
                     <div class="min-w-0 flex-auto ml-4">
                         <p class="text-sm font-semibold leading-6 text-gray-900">
-                        <a href="{{route('teams.show',$team)}}">
+                        <a href="{{route('teams.show',[$team->tournament, $team])}}">
                             <span class="absolute inset-x-0 -top-px bottom-0"></span>
                             {{$team->name}}
                         </a>

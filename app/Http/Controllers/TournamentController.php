@@ -38,7 +38,8 @@ class TournamentController extends Controller
      */
     public function show(Tournament $tournament)
     {
-        //
+        $teams = $tournament->teams()->paginate(5);
+        return view('teams.index', compact('teams', 'tournament'));
     }
 
     /**

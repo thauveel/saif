@@ -32,4 +32,13 @@ class Tournament extends BaseModel
         return $this->hasMany(Team::class);
     }
 
+    /**
+     * Get the 6 players for the team.
+     */
+    public function LatestTeams()
+    {
+        return $this->hasMany(Team::class)->latest()->take(4);
+    }
+    
+
 }

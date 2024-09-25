@@ -65,95 +65,199 @@
             </x-primary-button>
             @endif
         </div>
+        @if(!$updated)
+            <form wire:submit.prevent="submit">
+                @error('title')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+                
 
-        @else
-        <form wire:submit.prevent="submit">
-            @error('title')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-            <!-- Name -->
-            <div>
-                <x-input-label for="name" :value="__('Team Name')" />
-                <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" :value="old('name')" required autofocus autocomplete="name" />
-                <x-input-error :messages="$errors->get('name')" class="mt-2" />
-            </div>
+                @if($tournament->is_divisible)
+                <!-- Division -->
+                <div class="mt-4">
+                    <x-input-label for="division" :value="__('Division')" />
+                    <div class="mt-2 flex items-center gap-x-3">
+                    <input wire:model="division" id="division" name="division" type="radio" value="men" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                    <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">Mens</label>
+                    <input wire:model="division" id="division" name="division" type="radio" value="women" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                    <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">Womens</label>
+                </div>
+                    <x-input-error :messages="$errors->get('division')" class="mt-2" />
+                </div>
+                @endif
+                
+                <!-- Jersey Document -->
+                <div class="mt-4">
+                    <x-input-label for="jersey_document" :value="__('Team Jersey Document')" />
 
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-input-label for="email" :value="__('Email')" />
-                <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email"  :value="old('email')" required autocomplete="email" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-            </div>
-
-            <!-- Phone Number -->
-            <div class="mt-4">
-                <x-input-label for="phone" :value="__('Phone')" />
-                <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" type="number"  :value="old('phone')" required autocomplete="phone" />
-                <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-            </div>
-
-            @if($tournament->is_divisible)
-            <!-- Division -->
-            <div class="mt-4">
-                <x-input-label for="division" :value="__('Division')" />
-                <div class="mt-2 flex items-center gap-x-3">
-                <input wire:model="division" id="division" name="division" type="radio" value="men" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">Mens</label>
-                <input wire:model="division" id="division" name="division" type="radio" value="women" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">Womens</label>
-              </div>
-                <x-input-error :messages="$errors->get('division')" class="mt-2" />
-            </div>
-            @endif
-
-            <!-- Logo -->
-            <div class="mt-4">
-                <x-input-label for="logo" :value="__('Team Logo')" />
-
-                <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                    <div class="text-center">
-                        @if(!$logo)
-                        <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
-                        </svg>
-                        @endif
-                        @if($logo)
-                        <svg class="checkmark_upload mx-auto h-12 w-12 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
-                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                        </svg>
-                        @endif
-                        <div class="mt-4 text-sm leading-6 text-gray-600">
-                        <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-                            <span>Upload a file</span>
-                            <input id="file-upload" wire:model="logo" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg">
-                        </label>
+                    <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                        <div class="text-center">
+                            @if(!$jersey_document)
+                            <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            @endif
+                            @if($jersey_document)
+                            <svg class="checkmark_upload mx-auto h-12 w-12 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                            </svg>
+                            @endif
+                            <div class="mt-4 text-sm leading-6 text-gray-600">
+                            <label for="file-upload2" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                <span>Upload a file</span>
+                                <input id="file-upload2" wire:model="jersey_document" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg, application/pdf">
+                            </label>
+                            </div>
+                            <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG, PDF up to 4MB</p>
+                            <x-input-error :messages="$errors->get('jersey_document')" class="mt-2" />
                         </div>
-                        <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG up to 1MB</p>
-                        <x-input-error :messages="$errors->get('logo')" class="mt-2" />
                     </div>
                 </div>
+                
 
-            </div>
+                <!-- Save -->
+            
+                <div class="flex items-center justify-end mt-4">
+                    @if(session()->has('success'))
+                        <p class="alert alert-success" role="alert">
+                            {{ session()->get('success') }}
+                        </p>
+                    @endif
+                    @if(session()->has('error'))
+                        <p class="alert alert-danger" role="alert">
+                            {{ session()->get('error') }}
+                        </p>
+                    @endif
+                    <x-primary-button wire:click.prevent="update_team()"  class="ml-4">
+                        {{ __('Update') }}
+                    </x-primary-button>
+                </div>
+            </form>
+        @endif
 
-            <!-- Save -->
-        
-            <div class="flex items-center justify-end mt-4">
-                @if(session()->has('success'))
-                    <p class="alert alert-success" role="alert">
-                        {{ session()->get('success') }}
-                    </p>
+        @else
+            <form wire:submit.prevent="submit">
+                @error('title')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+                <!-- Name -->
+                <div>
+                    <x-input-label for="name" :value="__('Team Name')" />
+                    <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" :value="old('name')" required autofocus autocomplete="name" />
+                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                </div>
+
+                <!-- Email Address -->
+                <div class="mt-4">
+                    <x-input-label for="email" :value="__('Email')" />
+                    <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email"  :value="old('email')" required autocomplete="email" />
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                </div>
+
+                <!-- Phone Number -->
+                <div class="mt-4">
+                    <x-input-label for="phone" :value="__('Phone')" />
+                    <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" type="number"  :value="old('phone')" required autocomplete="phone" />
+                    <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+                </div>
+
+                @if($tournament->is_divisible)
+                <!-- Division -->
+                <div class="mt-4">
+                    <x-input-label for="division" :value="__('Division')" />
+                    <div class="mt-2 flex items-center gap-x-3">
+                    <input wire:model="division" id="division" name="division" type="radio" value="men" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                    <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">Mens</label>
+                    <input wire:model="division" id="division" name="division" type="radio" value="women" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                    <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">Womens</label>
+                </div>
+                    <x-input-error :messages="$errors->get('division')" class="mt-2" />
+                </div>
                 @endif
-                @if(session()->has('error'))
-                    <p class="alert alert-danger" role="alert">
-                        {{ session()->get('error') }}
-                    </p>
-                @endif
-                <x-primary-button wire:click.prevent="save_team()"  class="ml-4">
-                    {{ __('Next') }}
-                </x-primary-button>
-            </div>
-        </form>
+
+                <!-- Logo -->
+                <div class="mt-4">
+                    <x-input-label for="logo" :value="__('Team Logo')" />
+
+                    <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                        <div class="text-center">
+                            @if(!$logo)
+                            <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            @endif
+                            @if($logo)
+                            <svg class="checkmark_upload mx-auto h-12 w-12 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                            </svg>
+                            @endif
+                            <div class="mt-4 text-sm leading-6 text-gray-600">
+                            <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                <span>Upload a file</span>
+                                <input id="file-upload" wire:model="logo" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg">
+                            </label>
+                            </div>
+                            <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG up to 1MB</p>
+                            <x-input-error :messages="$errors->get('logo')" class="mt-2" />
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+
+                <!-- Jersey Document -->
+                <div class="mt-4">
+                    <x-input-label for="jersey_document" :value="__('Team Jersey Document')" />
+
+                    <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                        <div class="text-center">
+                            @if(!$jersey_document)
+                            <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            @endif
+                            @if($jersey_document)
+                            <svg class="checkmark_upload mx-auto h-12 w-12 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                            </svg>
+                            @endif
+                            <div class="mt-4 text-sm leading-6 text-gray-600">
+                            <label for="file-upload2" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                <span>Upload a file</span>
+                                <input id="file-upload2" wire:model="jersey_document" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg, application/pdf">
+                            </label>
+                            </div>
+                            <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG up to 4MB</p>
+                            <x-input-error :messages="$errors->get('jersey_document')" class="mt-2" />
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+
+                <!-- Save -->
+            
+                <div class="flex items-center justify-end mt-4">
+                    @if(session()->has('success'))
+                        <p class="alert alert-success" role="alert">
+                            {{ session()->get('success') }}
+                        </p>
+                    @endif
+                    @if(session()->has('error'))
+                        <p class="alert alert-danger" role="alert">
+                            {{ session()->get('error') }}
+                        </p>
+                    @endif
+                    <x-primary-button wire:click.prevent="save_team()"  class="ml-4">
+                        {{ __('Next') }}
+                    </x-primary-button>
+                </div>
+            </form>
         @endif
     </div>
 </div>

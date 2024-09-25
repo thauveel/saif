@@ -20,7 +20,7 @@ class Team extends Component
 
     public $current_team, $step = 0, $total_steps = 5;
     //team details
-    public $name, $email, $division = 'men', $phone, $logo;
+    public $name, $email, $division = 'men', $phone, $logo, $jersey_document;
     //player detail
     public $player_name, $jersey_number, $id_number, $photo, $is_libero = false, $verification_document;
     //official details
@@ -31,21 +31,44 @@ class Team extends Component
     public $playerss = [];
     public $officials = [], $official;
 
+    public $updated = false;
+
     public function save_team(){
         $validatedData = $this->validate([
             'name' => 'required',
             'email' => 'email|required',
             'phone' => 'required|numeric',
-            'division' => 'required|in:men,women',
+            'division' => 'sometimes|in:men,women',
             'logo'  => 'image|required|max:10000|mimes:png,svg,jpg,jpeg,webp',
+            'jersey_document'  => 'required|file|max:50000|mimes:png,svg,jpg,pdf'
         ]);
 
         try {
             $validatedData = array_merge($validatedData, ['tournament_id' => Tournament::first()->id, 'status' => 'draft']);
             
             $temp_logo = $this->logo->store('logo', 'public');
+            $temp_jersey_doc = $this->jersey_document->store('jersey_document', 'public');
             $this->current_team = $this->tournament->teams()->create($validatedData);
             $this->current_team->logo = $temp_logo;
+            $this->current_team->jersey_document = $temp_jersey_doc;
+            $this->current_team->save();
+            $this->updated = true;
+            $this->step++;
+        } catch (\Exception $ex) {
+            session()->flash('error',$ex);
+        }
+    }
+
+    public function update_team(){
+        $validatedData = $this->validate([
+            'jersey_document'  => 'required|file|max:50000|mimes:png,svg,jpg,pdf' 
+        ]);
+
+        try {
+            $validatedData = array_merge($validatedData, ['tournament_id' => Tournament::first()->id, 'status' => 'draft']);
+            
+            $temp_jersey_doc = $this->jersey_document->store('jersey_document', 'public');
+            $this->current_team->jersey_document = $temp_jersey_doc;
             $this->current_team->save();
             $this->step++;
         } catch (\Exception $ex) {
@@ -141,6 +164,13 @@ class Team extends Component
             if (!$this->current_team){
                 abort(404);
             }
+            $this->name = $this->current_team->name;
+            $this->email = $this->current_team->email;
+            $this->division = $this->current_team->division;
+            $this->phone = $this->current_team->phone;
+            $this->logo = $this->current_team->logo;
+            $this->jersey_document = $this->current_team->jersey_document;
+
             $this->players = [];
             $this->officials = [];
             $this->players =  Players::where('team_id',$this->current_team->id)->get();
@@ -148,6 +178,11 @@ class Team extends Component
             $this->officials = Officials::where('team_id',$this->current_team->id)->get();
 
             $this->step = 0;
+
+            if ($this->current_team->jersey_document) 
+            {
+                $this->updated = true;
+            }
             
             
         }

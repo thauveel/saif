@@ -78,6 +78,7 @@
                 <option value="assistant coach">Assistant Coach</option>
                 <option value="trainer">Trainer</option>
                 <option value="medical assistant">Medical Assistant</option>
+                <option value="follower">Follower</option>
               </select>
               <x-input-error :messages="$errors->get('official_type')" class="mt-2" />
         </div>

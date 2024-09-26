@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('tournaments/{tournament}/teams', TeamController::class);
-    Route::get('tournaments/{tournament}/teams/{team}/print', [TeamController::class, 'print']);
+    Route::get('tournaments/{tournament}/teams/{team}/print', [TeamController::class, 'print'])->name('teams.print');
     Route::resource('tournaments', TournamentController::class);
 });
 

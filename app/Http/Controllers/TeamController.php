@@ -46,7 +46,7 @@ class TeamController extends Controller
     /**
      * Display the specified resource.
      */
-    public function print(Team $team)
+    public function print(Tournament $tournament, Team $team)
     {
         return view('teams.print', compact('team'));
     }

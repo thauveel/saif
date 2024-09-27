@@ -48,7 +48,8 @@ class TeamController extends Controller
      */
     public function print(Tournament $tournament, Team $team)
     {
-        return view('teams.print', compact('team'));
+        
+        return view('teams.print', compact('team', 'tournament'));
     }
 
     /**

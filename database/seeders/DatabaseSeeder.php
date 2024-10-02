@@ -17,13 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => 'Administrator',
-            'email' => 'info@rac.gov.mv',
-            'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-            'remember_token' => Str::random(10),
-        ]);
+        // DB::table('users')->insert([
+        //     'name' => 'Administrator',
+        //     'email' => 'info@rac.gov.mv',
+        //     'password' => Hash::make('password'),
+        //     'email_verified_at' => now(),
+        //     'remember_token' => Str::random(10),
+        // ]);
 
         DB::table('tournaments')->insert([
             'id' => '03c34260-7b80-48f9-b7dd-79046e4cd2a5',
@@ -57,6 +57,24 @@ class DatabaseSeeder extends Seeder
             'max_players' => 14,
             'max_officials' => 4,
             'max_jersey_no' => 99
+        ]);
+
+        DB::table('tournaments')->insert([
+            'id' => 'b09037eb-1fa1-4ccc-9256-9f86532d5a70',
+            'name' => 'Arutha Futsal Tournament',
+            'slug' => 'AF24',
+            'description' => 'The Arutha Futsal Tournament is now open to teams across our atoll! This exciting competition showcases fast-paced action, teamwork, and skill. Come together to compete, have fun, and celebrate the spirit of futsal as teams battle for victory and local pride!',
+            'date' => '2024-10-15',
+            'due_date' => '2024-10-13',
+            'venue' => null,
+            'logo' =>'/af24.png',
+            'tc' =>'/af24.pdf',
+            'status' => 'open',
+            'type' => 'futsal',
+            'max_players' => 12,
+            'max_officials' => 4,
+            'max_jersey_no' => 99,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
     }
 }

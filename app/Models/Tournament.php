@@ -10,8 +10,10 @@ class Tournament extends BaseModel
 {
     use HasFactory;
 
+    public $timestamps = true;
+
     protected $fillable = [
-        'name', 'slug', 'description', 'date', 'due_date', 'status', 'venue', 'logo', 'type', 'jersey_document'
+        'name', 'slug', 'description', 'date', 'due_date', 'status', 'venue', 'logo', 'type', 'jersey_document', 'created_at'
     ];
 
     /**

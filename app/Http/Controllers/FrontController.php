@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class FrontController extends Controller
 {
     public function index(){
-        $tournaments = Tournament::where('status' , '!=', 'draft')->get();
+        $tournaments = Tournament::where('status' , '!=', 'draft')->latest()->get();
         return view('home', compact('tournaments'));
     }
 

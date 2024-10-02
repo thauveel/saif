@@ -78,6 +78,7 @@
                     {{ $tournament->date->toFormattedDateString() }}
                 </span>
             </div>
+            @if($tournament->venue)
             <div class="w-max relative flex gap-2 h-9 items-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-blue-900/10 before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
                 <svg class="relative w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.5" d="M12 2C7.58172 2 4 6.00258 4 10.5C4 14.9622 6.55332 19.8124 10.5371 21.6744C11.4657 22.1085 12.5343 22.1085 13.4629 21.6744C17.4467 19.8124 20 14.9622 20 10.5C20 6.00258 16.4183 2 12 2Z" fill="#1C274C"/>
@@ -87,6 +88,7 @@
                     {{ $tournament->venue }}
                 </span>
             </div>
+            @endif
         </div>
         
         <h3 class="text-2xl font-semibold text-gray-800">

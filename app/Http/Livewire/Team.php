@@ -40,14 +40,19 @@ class Team extends Component
             'phone' => 'required|numeric',
             'division' => 'sometimes|in:men,women',
             'logo'  => 'image|required|max:10000|mimes:png,svg,jpg,jpeg,webp',
-            'jersey_document'  => 'required|file|max:50000|mimes:png,svg,jpg,pdf'
+            'jersey_document'  => 'nullable|file|max:50000|mimes:png,svg,jpg,pdf'
         ]);
 
         try {
             $validatedData = array_merge($validatedData, ['tournament_id' => Tournament::first()->id, 'status' => 'draft']);
             
             $temp_logo = $this->logo->store('logo', 'public');
-            $temp_jersey_doc = $this->jersey_document->store('jersey_document', 'public');
+            if ($this->jersey_document){
+                $temp_jersey_doc = $this->jersey_document->store('jersey_document', 'public');
+            }else{
+                $temp_jersey_doc = null;
+            }
+            
             $this->current_team = $this->tournament->teams()->create($validatedData);
             $this->current_team->logo = $temp_logo;
             $this->current_team->jersey_document = $temp_jersey_doc;

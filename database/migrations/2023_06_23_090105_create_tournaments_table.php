@@ -20,13 +20,14 @@ return new class extends Migration
             $table->date('due_date');
             $table->string('venue')->nullable();
             $table->string('logo');
-            $table->string(column: 'tc')->nullable();
+            $table->string('tc')->nullable();
             $table->string('status')->default('draft');
-            $table->string(column: 'type')->default('volleyball');
+            $table->string('type')->default('volleyball');
             $table->integer('max_players')->default(14);
             $table->integer('max_officials')->default(4);
             $table->integer('max_jersey_no')->default(21);
             $table->boolean('is_divisible')->default(false);
+            $table->enum('division', ['female', 'male'])->default('male');
             $table->boolean('is_libero_included')->default(false);
             $table->timestamps();
         });

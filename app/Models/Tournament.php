@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enum\Division;
+use App\Enum\TournamentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -24,6 +26,9 @@ class Tournament extends BaseModel
     protected $casts = [
         'due_date' => 'date:d-M-Y',
         'date' => 'date:d-M-Y',
+        'is_divisible' => 'boolean',
+        'division' => Division::class,
+        'status' => TournamentStatus::class
     ];
 
     /**

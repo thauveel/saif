@@ -6,6 +6,12 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TournamentController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/install', function () {
+    Artisan::call('storage:link');
+    return Artisan::output();
+});
 
 /*
 |--------------------------------------------------------------------------

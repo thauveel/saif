@@ -4,14 +4,14 @@ namespace App\Enum;
 
 enum Division: string
 {
-    case Female = 'Femalr';
-    case Male = 'Male';
+    case Mens = 'mens';
+    case Womens = 'womens';
 
     public function label(): string
     {
         return match($this) {
-            self::Female => 'Female',
-            self::Male => 'Male'
+            self::Mens => "Men's",
+            self::Womens => "Women's"
         };
     }
 

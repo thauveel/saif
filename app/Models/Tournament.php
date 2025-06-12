@@ -15,7 +15,23 @@ class Tournament extends BaseModel
     public $timestamps = true;
 
     protected $fillable = [
-        'name', 'slug', 'description', 'date', 'due_date', 'status', 'venue', 'logo', 'type', 'jersey_document', 'created_at'
+        'name',
+        'slug',
+        'description',
+        'date',
+        'due_date',
+        'venue',
+        'logo',
+        'tc',
+        'status',
+        'type',
+        'max_players',
+        'max_officials',
+        'max_jersey_no',
+        'is_divisible',
+        'division',
+        'is_libero_included',
+        'created_at'
     ];
 
     /**
@@ -24,7 +40,7 @@ class Tournament extends BaseModel
      * @var array
      */
     protected $casts = [
-        'due_date' => 'date:d-M-Y',
+        'due_date' => 'datetime',
         'date' => 'date:d-M-Y',
         'is_divisible' => 'boolean',
         'division' => Division::class,

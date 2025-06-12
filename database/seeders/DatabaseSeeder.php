@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Enum\Division;
+use App\Enum\TournamentType;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Carbon\Carbon;
@@ -37,9 +40,13 @@ class DatabaseSeeder extends Seeder
             'tc' =>'/av24.pdf',
             'status' => 'open',
             'type' => 'volleyball',
+            'is_divisible' => true,
+            'is_libero_included' => true,
             'max_players' => 15,
             'max_officials' => 5,
-            'max_jersey_no' => 21
+            'max_jersey_no' => 21,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('tournaments')->insert([
@@ -47,16 +54,19 @@ class DatabaseSeeder extends Seeder
             'name' => 'Arutha Handball Tournament',
             'slug' => 'AH24',
             'description' => 'The Arutha Handball Tournament is now open to teams across our atoll! This exciting competition showcases fast-paced action, teamwork, and skill. Come together to compete, have fun, and celebrate the spirit of handball as teams battle for victory and local pride!',
-            'date' => '2024-09-28',
-            'due_date' => '2024-09-25',
+            'date' => '2025-09-28',
+            'due_date' => '2025-09-25',
             'venue' => 'R.Meedhoo',
             'logo' =>'/ah24.png',
             'tc' =>'/ah24.pdf',
             'status' => 'open',
-            'type' => 'handball',
+            'type' => TournamentType::Handball,
+            'division' => Division::Womens,
             'max_players' => 14,
             'max_officials' => 4,
-            'max_jersey_no' => 99
+            'max_jersey_no' => 99,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('tournaments')->insert([
@@ -70,11 +80,13 @@ class DatabaseSeeder extends Seeder
             'logo' =>'/af24.png',
             'tc' =>'/af24.pdf',
             'status' => 'open',
-            'type' => 'futsal',
+            'type' => TournamentType::Futsal,
+            'division' => Division::Mens,
             'max_players' => 12,
             'max_officials' => 4,
             'max_jersey_no' => 99,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

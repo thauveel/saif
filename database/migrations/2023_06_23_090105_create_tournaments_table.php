@@ -26,9 +26,9 @@ return new class extends Migration
             $table->integer('max_players')->default(14);
             $table->integer('max_officials')->default(4);
             $table->integer('max_jersey_no')->default(21);
+            $table->boolean('jersey_document_required')->default(false);
             $table->boolean('is_divisible')->default(false);
             $table->string('division')->nullable();
-            $table->boolean('is_libero_included')->default(false);
             $table->timestamps();
         });
     }

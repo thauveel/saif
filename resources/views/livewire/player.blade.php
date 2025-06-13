@@ -75,7 +75,7 @@
             <div class="flex items-center justify-between">
                 <x-input-label for="jersey_number" :value="__('Jersey Number')" />
                 <div>
-                    @if($tournament->is_libero_included)
+                    @if($tournament->type->is_libero())
                     <label for="is_libero" class="inline-flex items-center">
                         <input id="is_libero" wire:model="is_libero" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="is_libero">
                         <span class="ml-2 text-sm text-gray-600">{{ __('Libero') }}</span>

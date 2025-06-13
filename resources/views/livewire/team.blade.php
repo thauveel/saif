@@ -9,7 +9,7 @@
         </a>
         
     </div>
-    <h2 class="my-4 text-2xl font-bold text-blue-950 md:text-3xl">{{ $tournament->name }}</h2>
+    <h2 class="my-4 text-2xl font-bold text-blue-950 md:text-3xl">{{ $tournament->name }} </h2>
     <header>
         <div class="max-w-7xl mx-auto py-6 px-10 sm:px-6 lg:px-8">
             <nav aria-label="Progress">
@@ -167,11 +167,11 @@
                 <div class="mt-4">
                     <x-input-label for="division" :value="__('Division')" />
                     <div class="mt-2 flex items-center gap-x-3">
-                    <input wire:model="division" id="division" name="division" type="radio" value="men" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                    <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">Mens</label>
-                    <input wire:model="division" id="division" name="division" type="radio" value="women" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                    <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">Womens</label>
-                </div>
+                        @foreach(\App\Enum\Division::cases() as $division)
+                            <input wire:model="division" id="division" name="division" type="radio" value="{{ $division->value }}" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                            <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">{{ $division->label() }}</label>
+                        @endforeach
+                    </div>
                     <x-input-error :messages="$errors->get('division')" class="mt-2" />
                 </div>
                 @endif

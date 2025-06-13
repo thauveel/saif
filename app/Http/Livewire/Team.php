@@ -1,7 +1,9 @@
 <?php
  
 namespace App\Http\Livewire;
- 
+
+use App\Enum\Division;
+use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
 use App\Models\Team as Teams;
 use App\Models\Official as Officials;
@@ -9,20 +11,19 @@ use App\Models\Player as Players;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
-use File;
+use Illuminate\Support\Facades\File;;
 
 class Team extends Component
 {
     use WithFileUploads; 
 
     public $tournament;
-    
 
     public $current_team, $step = 0, $total_steps = 5;
     //team details
-    public $name, $email, $division = 'men', $phone, $logo, $jersey_document;
+    public $name, $email, $division = Division::class, $phone, $logo, $jersey_document;
     //player detail
-    public $player_name, $jersey_number, $id_number, $photo, $is_libero = false, $verification_document;
+    public $player_name, $jersey_number, $id_number, $photo, $is_libero = false , $verification_document;
     //official details
     public $official_name, $official_type;
 
@@ -33,14 +34,15 @@ class Team extends Component
 
     public $updated = false;
 
+
     public function save_team(){
         $validatedData = $this->validate([
             'name' => 'required',
             'email' => 'email|required',
             'phone' => 'required|numeric',
-            'division' => 'sometimes|in:men,women',
+            'division' => ['sometimes', new Enum(Division::class)],
             'logo'  => 'image|required|max:10000|mimes:png,svg,jpg,jpeg,webp',
-            'jersey_document'  => 'nullable|file|max:50000|mimes:png,svg,jpg,pdf'
+            'jersey_document'  => $this->tournament->jersey_document_required? 'required|file|max:50000|mimes:png,svg,jpg,pdf':'nullable|file|max:50000|mimes:png,svg,jpg,pdf'
         ]);
 
         try {

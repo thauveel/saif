@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enum\Division;
 use App\Enum\TournamentStatus;
+use App\Enum\TournamentType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -28,6 +29,7 @@ class Tournament extends BaseModel
         'max_players',
         'max_officials',
         'max_jersey_no',
+        'jersey_document_required',
         'is_divisible',
         'division',
         'is_libero_included',
@@ -44,7 +46,8 @@ class Tournament extends BaseModel
         'date' => 'date:d-M-Y',
         'is_divisible' => 'boolean',
         'division' => Division::class,
-        'status' => TournamentStatus::class
+        'status' => TournamentStatus::class,
+        'type' => TournamentType::class,
     ];
 
     /**

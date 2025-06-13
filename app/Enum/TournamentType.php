@@ -19,5 +19,25 @@ enum TournamentType: string
         };
     }
 
+    public function is_libero(): bool
+    {
+        return match($this) {
+            self::Handball => false,
+            self::Futsal => false,
+            self::Volleyball => true,
+            self::Football => false
+        };
+    }
+
+    public function is_follower(): bool
+    {
+        return match($this) {
+            self::Handball => true,
+            self::Futsal => false,
+            self::Volleyball => false,
+            self::Football => false
+        };
+    }
+
 }
 

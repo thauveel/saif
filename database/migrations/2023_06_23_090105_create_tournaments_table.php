@@ -22,11 +22,13 @@ return new class extends Migration
             $table->string('logo');
             $table->string('tc')->nullable();
             $table->string('status')->default('draft');
+            $table->string('sport')->default('draft');
             $table->string('type')->default('volleyball');
             $table->integer('max_players')->default(14);
             $table->integer('max_officials')->default(4);
             $table->integer('max_jersey_no')->default(21);
-            $table->boolean('jersey_document_required')->default(false);
+            $table->boolean('jersey_document_required')->default(true);
+            $table->boolean('verification_document_required')->default(true);
             $table->boolean('is_divisible')->default(false);
             $table->string('division')->nullable();
             $table->timestamps();

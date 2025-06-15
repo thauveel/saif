@@ -25,14 +25,15 @@ class Tournament extends BaseModel
         'logo',
         'tc',
         'status',
+        'sport',
         'type',
         'max_players',
         'max_officials',
         'max_jersey_no',
         'jersey_document_required',
+        'verification_document_required',
         'is_divisible',
         'division',
-        'is_libero_included',
         'created_at'
     ];
 
@@ -45,6 +46,8 @@ class Tournament extends BaseModel
         'due_date' => 'datetime',
         'date' => 'date:d-M-Y',
         'is_divisible' => 'boolean',
+        'jersey_document_required' => 'boolean',
+        'verification_document_required' => 'boolean',
         'division' => Division::class,
         'status' => TournamentStatus::class,
         'type' => TournamentType::class,

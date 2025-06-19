@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Enum\Division;
+use App\Enum\Sport;
 use App\Enum\TournamentType;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -39,11 +40,15 @@ class DatabaseSeeder extends Seeder
             'logo' =>'/av24.png',
             'tc' =>'/av24.pdf',
             'status' => 'open',
-            'type' => 'volleyball',
+            'sport' => Sport::VOLLEYBALL,
+            'type' => TournamentType::ROUND_ROBIN,
             'is_divisible' => true,
             'max_players' => 15,
             'max_officials' => 5,
             'max_jersey_no' => 21,
+            'jersey_document_required' => true,
+            'verification_document_required' => false,
+            'player_type_required' => true,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -59,11 +64,14 @@ class DatabaseSeeder extends Seeder
             'logo' =>'/ah24.png',
             'tc' =>'/ah24.pdf',
             'status' => 'open',
-            'type' => TournamentType::Handball,
+            'sport' => Sport::HANDBALL,
+            'type' => TournamentType::ROUND_ROBIN,
             'division' => Division::Womens,
             'max_players' => 14,
             'max_officials' => 4,
             'max_jersey_no' => 99,
+            'jersey_document_required' => true,
+            'verification_document_required' => true,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -79,11 +87,14 @@ class DatabaseSeeder extends Seeder
             'logo' =>'/af24.png',
             'tc' =>'/af24.pdf',
             'status' => 'open',
-            'type' => TournamentType::Futsal,
+            'type' => TournamentType::KNOCKOUT,
+            'sport' => Sport::FUTSAL,
             'division' => Division::Mens,
             'max_players' => 12,
             'max_officials' => 4,
             'max_jersey_no' => 99,
+            'jersey_document_required' => true,
+            'verification_document_required' => true,
             'created_at' => now(),
             'updated_at' => now()
         ]);

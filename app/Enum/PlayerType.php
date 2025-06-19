@@ -58,13 +58,39 @@ enum PlayerType: string
     }
 
     public static function forSport(string $sport): array
-{
-    return match ($sport) {
-        'futsal' => [self::REGULAR, self::GOALKEEPER, self::DEFENDER, self::WINGER, self::PIVOT, self::ATTACKER],
-        'football' => [self::REGULAR, self::GOALKEEPER, self::DEFENDER, self::MIDFIELDER, self::ATTACKER, self::CENTER],
-        'volleyball' => [self::REGULAR, self::LIBERO, self::SETTER, self::SPIKER, self::BLOCKER],
-        'handball' => [self::REGULAR, self::GOALKEEPER, self::DEFENDER, self::RIGHT_WINGER, self::LEFT_WINGER, self::RIGHT_BACK, self::LEFT_BACK, self::CENTER_BACK],
-        default => [self::REGULAR],
-    };
-}
+    {
+        return match ($sport) {
+            'futsal' => [self::REGULAR, self::GOALKEEPER, self::DEFENDER, self::WINGER, self::PIVOT, self::ATTACKER],
+            'football' => [self::REGULAR, self::GOALKEEPER, self::DEFENDER, self::MIDFIELDER, self::ATTACKER, self::CENTER],
+            'volleyball' => [self::REGULAR, self::LIBERO, self::SETTER, self::SPIKER, self::BLOCKER],
+            'handball' => [self::REGULAR, self::GOALKEEPER, self::DEFENDER, self::RIGHT_WINGER, self::LEFT_WINGER, self::RIGHT_BACK, self::LEFT_BACK, self::CENTER_BACK],
+            default => [self::REGULAR],
+        };
+    }
+
+    public function shortCode(): string
+    {
+        return match ($this) {
+            self::REGULAR => 'R',
+            self::GOALKEEPER => 'GK',
+            self::DEFENDER => 'DF',
+            self::WINGER => 'WG',
+            self::PIVOT => 'PV',
+
+            self::LIBERO => 'LB',
+            self::SETTER => 'ST',
+            self::SPIKER => 'SP',
+            self::BLOCKER => 'BL',
+
+            self::RIGHT_BACK => 'RB',
+            self::LEFT_BACK => 'LBK',
+            self::CENTER_BACK => 'CB',
+            self::RIGHT_WINGER => 'RW',
+            self::LEFT_WINGER => 'LW',
+
+            self::MIDFIELDER => 'MF',
+            self::ATTACKER => 'AT',
+            self::CENTER => 'C',
+        };
+    }
 }

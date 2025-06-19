@@ -98,7 +98,7 @@
                 </td>
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ $official->id_number }}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $official->official_name }}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $official->official_type }}</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $official->type }}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $official->phone }}</td>
                 </tr>
                 @endforeach

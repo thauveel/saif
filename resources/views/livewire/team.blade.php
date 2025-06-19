@@ -71,20 +71,6 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
                 
-
-                @if($tournament->is_divisible)
-                <!-- Division -->
-                <div class="mt-4">
-                    <x-input-label for="division" :value="__('Division')" />
-                    <div class="mt-2 flex items-center gap-x-3">
-                    <input wire:model="division" id="division" name="division" type="radio" value="men" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                    <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">Mens</label>
-                    <input wire:model="division" id="division" name="division" type="radio" value="women" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                    <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">Womens</label>
-                </div>
-                    <x-input-error :messages="$errors->get('division')" class="mt-2" />
-                </div>
-                @endif
                 
                 <!-- Jersey Document -->
                 <div class="mt-4">
@@ -106,7 +92,7 @@
                             <div class="mt-4 text-sm leading-6 text-gray-600">
                             <label for="file-upload2" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                 <span>Upload a file</span>
-                                <input id="file-upload2" wire:model="jersey_document" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg, application/pdf">
+                                <input id="file-upload2" wire:model.lazy="jersey_document" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg, application/pdf">
                             </label>
                             </div>
                             <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG, PDF up to 4MB</p>
@@ -144,21 +130,21 @@
                 <!-- Name -->
                 <div>
                     <x-input-label for="name" :value="__('Team Name')" />
-                    <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" :value="old('name')" required autofocus autocomplete="name" />
+                    <x-text-input wire:model.lazy="name" id="name" class="block mt-1 w-full" type="text" :value="old('name')" required autofocus autocomplete="name" />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
 
                 <!-- Email Address -->
                 <div class="mt-4">
                     <x-input-label for="email" :value="__('Email')" />
-                    <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email"  :value="old('email')" required autocomplete="email" />
+                    <x-text-input wire:model.lazy="email" id="email" class="block mt-1 w-full" type="email"  :value="old('email')" required autocomplete="email" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
 
                 <!-- Phone Number -->
                 <div class="mt-4">
                     <x-input-label for="phone" :value="__('Phone')" />
-                    <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" type="number"  :value="old('phone')" required autocomplete="phone" />
+                    <x-text-input wire:model.lazy="phone" id="phone" class="block mt-1 w-full" type="number"  :value="old('phone')" required autocomplete="phone" />
                     <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                 </div>
 
@@ -168,7 +154,7 @@
                     <x-input-label for="division" :value="__('Division')" />
                     <div class="mt-2 flex items-center gap-x-3">
                         @foreach(\App\Enum\Division::cases() as $division)
-                            <input wire:model="division" id="division" name="division" type="radio" value="{{ $division->value }}" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                            <input wire:model.lazy="division" id="division" name="division" type="radio" value="{{ $division->value }}" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
                             <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">{{ $division->label() }}</label>
                         @endforeach
                     </div>
@@ -196,7 +182,7 @@
                             <div class="mt-4 text-sm leading-6 text-gray-600">
                             <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                 <span>Upload a file</span>
-                                <input id="file-upload" wire:model="logo" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg">
+                                <input id="file-upload" wire:model.lazy="logo" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg">
                             </label>
                             </div>
                             <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG up to 1MB</p>
@@ -208,6 +194,7 @@
 
                 </div>
 
+                @if($tournament->jersey_document_required)
                 <!-- Jersey Document -->
                 <div class="mt-4">
                     <x-input-label for="jersey_document" :value="__('Team Jersey Document')" />
@@ -228,7 +215,7 @@
                             <div class="mt-4 text-sm leading-6 text-gray-600">
                             <label for="file-upload2" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                 <span>Upload a file</span>
-                                <input id="file-upload2" wire:model="jersey_document" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg, application/pdf">
+                                <input id="file-upload2" wire:model.lazy="jersey_document" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg, application/pdf">
                             </label>
                             </div>
                             <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG up to 4MB</p>
@@ -239,6 +226,7 @@
                     
 
                 </div>
+                @endif
 
                 <!-- Save -->
             

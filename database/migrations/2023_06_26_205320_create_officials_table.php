@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('officials', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('official_name');
-            $table->string('official_type')->nullable();
+            $table->string('type')->nullable();
             $table->string('id_number');
             $table->string('phone');
             $table->string('photo')->nullable();

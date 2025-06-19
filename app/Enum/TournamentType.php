@@ -4,40 +4,24 @@ namespace App\Enum;
 
 enum TournamentType: string
 {
-    case Handball = 'handball';
-    case Futsal = 'futsal';
-    case Volleyball = 'volleyball';
-    case Football = 'Football';
+    case ROUND_ROBIN = 'round_robin';
+    case KNOCKOUT = 'knockout';
+    case DOUBLE_ELIMINATION = 'double_elimination';
+    case GROUP_STAGE_KNOCKOUT = 'group_stage_knockout';
+    case LEAGUE = 'league';
+    case SWISS = 'swiss';
+    case HYBRID = 'hybrid';
 
     public function label(): string
     {
-        return match($this) {
-            self::Handball => 'Handball',
-            self::Futsal => 'Fursal',
-            self::Volleyball => 'Volleyball',
-            self::Football => 'Football'
+        return match ($this) {
+            self::ROUND_ROBIN => 'Round Robin',
+            self::KNOCKOUT => 'Knockout',
+            self::DOUBLE_ELIMINATION => 'Double Elimination',
+            self::GROUP_STAGE_KNOCKOUT => 'Group Stage + Knockout',
+            self::LEAGUE => 'League Format',
+            self::SWISS => 'Swiss System',
+            self::HYBRID => 'Hybrid Format',
         };
     }
-
-    public function is_libero(): bool
-    {
-        return match($this) {
-            self::Handball => false,
-            self::Futsal => false,
-            self::Volleyball => true,
-            self::Football => false
-        };
-    }
-
-    public function is_follower(): bool
-    {
-        return match($this) {
-            self::Handball => true,
-            self::Futsal => false,
-            self::Volleyball => false,
-            self::Football => false
-        };
-    }
-
 }
-

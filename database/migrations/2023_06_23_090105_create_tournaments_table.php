@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('max_jersey_no')->default(21);
             $table->boolean('jersey_document_required')->default(true);
             $table->boolean('verification_document_required')->default(true);
+            $table->boolean('player_type_required')->default(false);
             $table->boolean('is_divisible')->default(false);
             $table->string('division')->nullable();
             $table->timestamps();

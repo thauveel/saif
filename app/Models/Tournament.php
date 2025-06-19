@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enum\Division;
+use App\Enum\Sport;
 use App\Enum\TournamentStatus;
 use App\Enum\TournamentType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,6 +33,7 @@ class Tournament extends BaseModel
         'max_jersey_no',
         'jersey_document_required',
         'verification_document_required',
+        'player_type_required',
         'is_divisible',
         'division',
         'created_at'
@@ -48,6 +50,8 @@ class Tournament extends BaseModel
         'is_divisible' => 'boolean',
         'jersey_document_required' => 'boolean',
         'verification_document_required' => 'boolean',
+        'player_type_required' => 'boolean',
+        'sport' => Sport::class,
         'division' => Division::class,
         'status' => TournamentStatus::class,
         'type' => TournamentType::class,

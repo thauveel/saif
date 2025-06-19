@@ -108,15 +108,6 @@
                                     <h3
                                         class="relative inline-flex items-center gap-x-1.5 mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">
                                         {{$player['player_name']}} ({{$player['jersey_number']}})
-                                        @if($player['is_libero'])
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                                            </svg>
-                                        </span>
-                                        @endif
                                     </h3>
                                     <p class="text-sm leading-6 text-gray-600">{{$player['id_number']}}</p>
                                 </li>
@@ -170,7 +161,7 @@
                                 </div>
                                 <div class="flex items-center gap-x-4">
                                     <div class="hidden sm:flex sm:flex-col sm:items-end">
-                                        <p class="text-sm leading-6 text-gray-900">{{$official['official_type']}}</p>
+                                        <p class="text-sm leading-6 text-gray-900">{{$official['type']}}</p>
                                     </div>
                                 </div>
                             </li>

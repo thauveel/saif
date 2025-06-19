@@ -77,6 +77,7 @@ class TeamController extends Controller
         $team->officials()->delete();
         $team->delete();
 
-        return redirect(route('teams.index'));
+        return to_route('tournaments.show', $tournament->slug)
+            ->with('success', 'Team deleted successfully');
     }
 }

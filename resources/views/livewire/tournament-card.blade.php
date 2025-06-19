@@ -50,7 +50,7 @@
                     
                 </svg>
                 <span class="w-max relative text-sm font-semibold text-blue-600">
-                    {{ Str::ucfirst($tournament->type) }}
+                    {{ $tournament->sport->label() }}
                 </span>
             </div>
             <div class="w-max relative flex gap-2 h-9 items-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-blue-900/10 before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">

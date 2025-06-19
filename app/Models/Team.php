@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\Division;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,6 +18,15 @@ class Team extends BaseModel
     ];
 
     public $timestamps = true;
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'division' => Division::class,
+    ];
 
     /**
      * Get the tournament for the team.

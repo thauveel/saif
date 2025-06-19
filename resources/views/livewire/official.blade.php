@@ -57,6 +57,8 @@
 <div class="w-full sm:max-w-4xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
     <livewire:team-card-small :team="$current_team"/>
     @if (count($officials) < $tournament->max_officials)
+
+    <h3 class="text-lg font-semibold text-gray-900">Add Official</h3>
     <form wire:submit.prevent="submit">
                 @error('title')
                     <span class="text-danger">{{ $message }}</span>
@@ -64,36 +66,33 @@
         <!-- Official Name -->
         <div>
             <x-input-label for="official_name" :value="__('Official Name')" />
-            <x-text-input wire:model="official_name" id="official_name" class="block mt-1 w-full" type="text" :value="old('official_name')" required autofocus autocomplete="official_name" />
+            <x-text-input wire:model.lazy="official_name" id="official_name" class="block mt-1 w-full" type="text" :value="old('official_name')" required autofocus autocomplete="official_name" />
             <x-input-error :messages="$errors->get('official_name')" class="mt-2" />
         </div>
 
         <!-- Official Type -->
         <div class="mt-4">
-            <x-input-label for="official_type" :value="__('Official Type')" />
-            <select wire:model="official_type" id="official_type" name="official_type" autocomplete="official_type" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
+            <x-input-label for="type" :value="__('Official Type')" />
+            <select wire:model.lazy="type" id="type" name="type" autocomplete="type" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
                 <option>----</option>
-                <option value="manager">Manager</option>
-                <option value="coach">Coach</option>
-                <option value="assistant coach">Assistant Coach</option>
-                <option value="trainer">Trainer</option>
-                <option value="medical assistant">Medical Assistant</option>
-                <option value="follower">Follower</option>
+                @foreach(\App\Enum\OfficialType::forSport($tournament->sport->value) as $type)
+                <option value="{{ $type->value }}">{{ $type->label() }}</option>
+                @endforeach
               </select>
-              <x-input-error :messages="$errors->get('official_type')" class="mt-2" />
+              <x-input-error :messages="$errors->get('type')" class="mt-2" />
         </div>
 
         <!-- ID/PP Number -->
         <div class="mt-4">
             <x-input-label for="id_number" :value="__('ID/PP Number')" />
-            <x-text-input wire:model="id_number" id="id_number" class="block mt-1 w-full" type="text"  :value="old('id_number')" required autocomplete="id_number" />
+            <x-text-input wire:model.lazy="id_number" id="id_number" class="block mt-1 w-full" type="text"  :value="old('id_number')" required autocomplete="id_number" />
             <x-input-error :messages="$errors->get('id_number')" class="mt-2" />
         </div>
 
         <!-- Phone Number -->
         <div class="mt-4">
             <x-input-label for="phone" :value="__('Phone')" />
-            <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" type="number"  :value="old('phone')" required autocomplete="phone" />
+            <x-text-input wire:model.lazy="phone" id="phone" class="block mt-1 w-full" type="number"  :value="old('phone')" required autocomplete="phone" />
             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
         </div>
 
@@ -116,7 +115,7 @@
                     <div class="mt-4 text-sm leading-6 text-gray-600">
                     <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                         <span>Upload a file</span>
-                        <input id="file-upload" wire:model="photo" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg">
+                        <input id="file-upload" wire:model.lazy="photo" type="file" class="sr-only" accept="image/png, image/jpg, image/jpeg">
                     </label>
                     </div>
                     <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG up to 1MB</p>
@@ -143,7 +142,7 @@
             @if($officials)
             <ul role="list" class="mx-auto mt-20 grid grid-cols-1 gap-x-8 gap-y-16 text-center sm:grid-cols-2 md:grid-cols-3 lg:mx-0 lg:max-w-none lg:grid-cols-4 xl:grid-cols-5">
                 @foreach ($officials as $official)
-                <li class="relative group duration-300 transform cursor-pointer group hover:bg-blue-600 rounded-xl p-4">
+                <li  class="relative group duration-300 transform cursor-pointer group hover:bg-blue-600 rounded-xl p-4">
                     <button wire:click="delete_official('{{$official['id']}}')"  type="button" class="absolute top-0 right-0 mt-[-5px] mr-[-5px] rounded-full bg-red-600 p-1 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
                         <svg class="h-5 w-5" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -156,7 +155,7 @@
                     <img class="mx-auto h-24 w-24 rounded-full object-cover" src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=200" alt="">
                     @endif
                     <h3 class="relative inline-flex items-center gap-x-1.5 mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">
-                        {{$official['official_name']}} ({{$official['official_type']}})
+                        {{$official['official_name']}} ({{$official['type']}})
                         
                     </h3>
                     <p class="text-sm leading-6 text-gray-600">{{$official['id_number']}}</p>

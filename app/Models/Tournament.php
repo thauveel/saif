@@ -72,6 +72,11 @@ class Tournament extends BaseModel
     {
         return $this->hasMany(Team::class)->latest()->take(4);
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
     
 
 }

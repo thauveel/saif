@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :tournament="$tournament">
     <x-slot name="header">
         <div class="mx-auto max-w-3xl md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl">
             <div class="flex items-center space-x-5">

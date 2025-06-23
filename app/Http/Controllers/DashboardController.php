@@ -6,13 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Team;
 use App\Models\Player;
 use App\Models\Official;
+use App\Models\Tournament;
 
 class DashboardController extends Controller
 {
     public function index(){
-        $teams = Team::all()->count();
-        $players = Player::all()->count();
-        $officials = Official::all()->count();
-        return view('dashboard', compact('teams','players','officials'));
+        $tournaments = Tournament::all();
+        return view('dashboard', compact('tournaments'));
     }
 }

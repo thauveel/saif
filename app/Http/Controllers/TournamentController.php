@@ -8,14 +8,6 @@ use App\Models\Tournament;
 
 class TournamentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $tournaments = Tournament::paginate(5);
-        return view('tournaments.index', compact('tournaments'));
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -38,8 +30,18 @@ class TournamentController extends Controller
      */
     public function show(Tournament $tournament)
     {
+        $tournament = $tournament->load(['teams', 'teams.players']);
         $teams = $tournament->teams()->paginate(5);
-        return view('teams.index', compact('teams', 'tournament'));
+        return view('tournaments.dashboard', compact('teams', 'tournament'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function dashboard(Tournament $tournament)
+    {
+        
+        return view('teams.show', compact('team',));
     }
 
     /**

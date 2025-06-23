@@ -1,3 +1,4 @@
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,6 +15,15 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Blah') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('tournament.dashboard', $tournament)" :active="request()->routeIs('tournament.*')"> --}}
+                        {{ __('Tournaments') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('teams.index', $tournament)" :active="request()->routeIs('teams.*')"> --}}
+                        {{ __('Teams') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -69,6 +79,9 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('tournaments.index')" :active="request()->routeIs('tournaments.*')">
+                {{ __('Tournaments') }}
             </x-responsive-nav-link>
         </div>
 

@@ -1,4 +1,4 @@
-<x-tournament-layout tournament="$tournament">
+<x-tournament-layout :tournament="$tournament">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ $tournament->name }} -> {{ __('Teams') }}

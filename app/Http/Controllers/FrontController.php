@@ -19,7 +19,7 @@ class FrontController extends Controller
     }
 
     public function create(Tournament $tournament){
-        if($tournament->status == TournamentStatus::Open)
+        if($tournament->status == TournamentStatus::OPEN)
         {
             return view('application', compact('tournament'));
         }

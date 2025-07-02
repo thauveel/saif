@@ -10,6 +10,16 @@ class TournamentController extends Controller
 {
 
     /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+
+        $tournaments = Tournament::all();
+        return view('dashboard', compact('tournaments'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

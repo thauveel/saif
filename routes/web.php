@@ -38,10 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('tournaments/{tournament:slug}/teams', TeamController::class);
     Route::get('tournaments/{tournament:slug}/teams/{team}/print', [TeamController::class, 'print'])->name('teams.print');
-    Route::resource('tournaments', TournamentController::class);
+    
     // tournament links
    // Route::get('tournaments/{tournament:slug}', [TournamentController::class, 'dashboard'])->name('tournament.dashboard');
     Route::resource('tournaments', TournamentController::class);

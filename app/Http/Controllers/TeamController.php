@@ -12,10 +12,14 @@ class TeamController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Tournament $tournament)
     {
-        $teams = Team::paginate(5);
-        return view('teams.index', compact('teams'));
+
+        $teams = $tournament->teams()
+            ->with(['players', 'officials'])
+            ->orderBy('name')
+            ->paginate(10);
+        return view('teams.index', compact('tournament', 'teams'));
     }
 
     /**
@@ -40,7 +44,7 @@ class TeamController extends Controller
     public function show(Tournament $tournament, Team $team)
     {
         $resubmitlink = $tournament->slug."/apply?team=".$team->id;
-        return view('teams.show', compact('team','resubmitlink'));
+        return view('teams.show', compact('team','resubmitlink', 'tournament'));
     }
 
     /**
